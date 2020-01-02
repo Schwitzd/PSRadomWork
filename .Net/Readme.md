@@ -1,0 +1,3 @@
+## .Net
+
+* **Get-ClickOnceAppsFolder** - pippo
