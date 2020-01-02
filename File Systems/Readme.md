@@ -4,6 +4,7 @@
 
 * **Get-aclGroups** - Get all ACL Groups for a Directory and its subfolders
 * **Get-ACLNotInheritPermissions** - Get all paths with not Inherit Permissions
+* **Get-ACLTree** - Get all ACL groups for a Directory Path in tree view
 * **Get-FoldersWithoutAccess** - Get all Folders with Access Denied.
 
 ## Files
