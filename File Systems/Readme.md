@@ -8,6 +8,7 @@
 
 ## Files
 
+* **Find-LockedFileProcess** - This function help track down a process that is locking down a file you are trying access
 * **Get-FilesOlderThan** - Returns files from within a directory and optionally subdirectories that are older than a specified period
 * **Update-StringInFile** - Replace a string in one or multiple files
 
