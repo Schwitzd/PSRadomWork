@@ -7,6 +7,7 @@
 ## Groups
 
 * **Get-ADMemberOf** - Get Members of for a computer or user
+* **PSADNestedGroupMembers** - is a module to get or export group membership
 
 ## Users
 
