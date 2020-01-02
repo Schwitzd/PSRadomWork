@@ -12,6 +12,7 @@ On every folder a brief description of the scripts.
 * [Operating System](Operating%20System)
 * [Printers](Printers)
 * [SCCM](SCCM)
+* [VMware](VMware)
 * [.Net](.Net)
 
 Cheers 🍻
