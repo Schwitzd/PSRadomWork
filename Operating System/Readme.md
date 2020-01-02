@@ -10,11 +10,11 @@
 * **Get-ShutdownReasons** - Export all the shutdown reasons within the asked period in HTML Report
 * **Get-StartUpShutdown** - This function will get the Startup and Shutdown datetime
 
-# Process
+## Process
 
 * **Stop-RemoteProcess** - Get the list of processes running on a remote computer and kill the selected
 
-# Registry
+## Registry
 
 * **Test-RegistryValue** - Test if a Registry value exist
 
