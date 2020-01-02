@@ -9,6 +9,10 @@
 * **Get-ADMemberOf** - Get Members of for a computer or user
 * **PSADNestedGroupMembers** - is a module to get or export group membership
 
+## OU
+
+* **Get-ADOuFromDN** - This function will return the OU DN of the Input object
+
 ## Users
 
 * **Convert-SIDToUsername** - Convert a SID to username
