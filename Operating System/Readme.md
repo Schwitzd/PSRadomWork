@@ -1,5 +1,9 @@
 # Operating System
 
+## Infos
+
+* **Get-ComputerInfo** - This function will get hardware and OS infos
+
 ## Power Management
 
 * **Get-ComputerUptime** - This function will get the computer uptime
