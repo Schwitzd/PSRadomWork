@@ -60,7 +60,8 @@ Function Get-VMApplicationInfo
         if ($appInfo)
         {
             $appInfo.applications | Sort-Object -Property a | 
-                Select-Object @{Name = 'Application'; Expression = { $_.a } }, @{Name = 'Version'; Expression = { $_.v } }
+                Select-Object @{Name = 'Application'; Expression = { $_.a } }, 
+                    @{Name = 'Version'; Expression = { $_.v } }
         }
         else
         {
@@ -70,7 +71,6 @@ Function Get-VMApplicationInfo
 
     end
     {
-        $diskMatches | Format-Table
         $null = Disconnect-VIServer -Server $vCenter -Confirm:$false  
     }
 }
