@@ -1,0 +1,18 @@
+{
+    "Morrovalle": [
+        {
+            "Server": "FOO1",
+            "Port": "222",
+            "RemotePath": "/Remote",
+            "LocalPath": "\\\\foo.com\\all\\ciao"
+        }
+    ],
+    "Coldrerio": [
+        {
+            "Server": "FOO2",
+            "Port": "111",
+            "RemotePath": "/Remote",
+            "LocalPath": "\\\\foo.com\\all\\ciao"
+        }
+    ]
+}
