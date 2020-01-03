@@ -15,6 +15,5 @@ On every folder a brief description of the scripts.
 * [SCCM](SCCM)
 * [VMware](VMware)
 * [.Net](.Net)
-* [ZZ - Examples](ZZ%20-%20Examples)
 
 Cheers 🍻
