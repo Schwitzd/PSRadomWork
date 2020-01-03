@@ -19,11 +19,6 @@ function Get-PrinterDriver
     Created:    18/04/2016
     Modified:   20/11/2019
     Version:    1.2
-    Changes:    1.1   Add    - Function and Parameters
-                1.2   Add    - Added OutputType and Parameter validation
-                      Change - Replaced Get-WmiObject with Get-CimInstance
-                      Change - Replaced foreach with Foreach-Object
-
   #>
 
   [OutputType([System.Management.Automation.PSCustomObject])] 

@@ -17,7 +17,6 @@
 		Created:	07/08/2016
 		Modified:	08/08/2016
 		Version:	1.0
-		Changes:  
 	#>
 	
 	[CmdletBinding()]

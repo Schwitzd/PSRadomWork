@@ -21,12 +21,6 @@ function Get-ADMemberOf
         Created:   31/08/2018
         Modified:  22/05/2019
         Version:   1.3.2
-        Changes:   1.1    Change - Removed Positional parameter
-                   1.2    Change - Code Refactoring
-                   1.3    Add    - Added Username as DefaultParameterSetName
-                          Add    - Enforced Parameter validation
-                   1.3.1  Change - fixed a typo issue with ValidateNotNullOrEmpty
-                   1.3.2  Change - Code style improvement
     #> 
 
     [CmdletBinding(DefaultParameterSetName = 'Username')]

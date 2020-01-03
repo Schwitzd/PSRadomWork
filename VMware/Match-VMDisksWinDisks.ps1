@@ -21,9 +21,6 @@ Function Match-VMDisksWinDisks
         Created:    04/05/2016
         Modified:   03/01/2019
         Version:    1.2
-        Changes:    1.1     Change - Removed Snap-In
-                            Change - Replaced WMI with CIM
-                            Add    - Converted to and Advanced Function
 
         Credits: Jacob Ludriks (https://gist.github.com/jacobludriks/a6356e89d54aad11cc4f#file-vmscsi-ps1)
 

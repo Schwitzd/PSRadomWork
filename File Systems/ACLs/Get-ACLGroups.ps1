@@ -21,7 +21,6 @@ Function Get-aclGroups
     Created:   25/09/2018
     Modified:  25/09/2018
     Version:   1.1
-    Changes:
   #>
   
   param ( 

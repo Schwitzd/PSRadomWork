@@ -20,9 +20,6 @@ Function Get-UserLogon
     Created:   10/03/2018
     Modified:  10/12/2019
     Version:   1.2
-    Changes:   1.1   Change - Replaced Name with DisplayName in Get-ADUser
-               1.2   Change - Code style improvement
-                     Add    - Function OutputType and parameter validation
   #>
   
   [OutputType([System.Management.Automation.PSCustomObject])] 

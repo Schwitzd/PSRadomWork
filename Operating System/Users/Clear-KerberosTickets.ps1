@@ -22,8 +22,6 @@ function Clear-KerberosTickets
     Created:   26/10/2018
     Modified:  10/12/2019
     Version:   1.2
-    Changes:   1.1  Add    - Invoke-Command for remote computers
-               1.2  Change - Code style improvement
   #>
 
   [OutputType([void])]

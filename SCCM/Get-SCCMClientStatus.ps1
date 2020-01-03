@@ -18,9 +18,6 @@ Function Get-SCCMClientStatus
     Created:   08/06/2018
     Modified:  30/12/2019
     Version:   1.2.1
-    Changes:   1.1    Add    - Implemented Return to Pipeline
-               1.2    Add    - Function OutputType and parameter validation
-               1.2.1  Change - Small cosmetic changes
   #>
 
   [OutputType([Microsoft.Management.Infrastructure.CimInstance])]

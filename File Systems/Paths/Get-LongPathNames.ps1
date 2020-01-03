@@ -22,7 +22,6 @@ function Get-LongPathNames
     Created:    18/04/2016
     Modified:   25/08/2016
     Version:    1.0
-    Changes:
 
   .LINK
     http://www.powershellmagazine.com/2012/07/24/jaap-brassers-favorite-powershell-tips-and-tricks/

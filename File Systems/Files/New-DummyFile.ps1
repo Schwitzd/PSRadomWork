@@ -21,12 +21,6 @@
     Created:    07/08/2014
     Modified:   27/12/2019
     Version:    1.3.1
-    Changes:    1.1   Add     - Created Function with Parameters
-                1.2   Add     - Added OutputType
-                      Add     - Added Verbose Parameter
-                      Change  - Converted to Advanced Function
-                1.3   Change  - Error handling with try/catch
-                1.3.1 Change  - Better Exception handling    
   #>
 
   [OutputType([void])]

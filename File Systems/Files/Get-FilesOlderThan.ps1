@@ -43,11 +43,6 @@ function Get-FilesOlderThan
     Created:    27/11/2012
     Modified:   02/01/2020
     Version:    1.2
-    Updates:    1.1   Add	    - Created Function
-                      Change  - Improved Cmdlets parameters
-                1.2   Change  - Code restyle
-                      Change  - wrong operator parameter for filter by date
-                      Change  - Replaced duplicated code block with a splat
   #>
 
   [CmdletBinding()] 

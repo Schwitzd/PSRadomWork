@@ -19,7 +19,6 @@ Function Convert-SIDToUsername
     Created:   28/02/2017
     Modified:  10/12/2019
     Version:   1.1
-    Changes:   1.1  Change - Code style improved
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADUser])]

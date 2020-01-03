@@ -128,7 +128,6 @@ function Get-ACLTree
     Created:    28/09/2019
     Modified:   10/12/2019
     Version:    1.1
-    Changes:
 
     Credit: Lee Spottiswood (https://github.com/0x4c6565/PSTree)
     #>

@@ -22,9 +22,7 @@ function Find-LockedFileProcess
     Created:    26/03/2018
     Modified:   20/12/2019
     Version:    1.1
-    Changes:    1.1   Change - Code style improvement
-                      Add    - Function OutputType    
-#> 
+  #> 
 
   [OutputType([System.Management.Automation.PSCustomObject])]
   [CmdletBinding()] 

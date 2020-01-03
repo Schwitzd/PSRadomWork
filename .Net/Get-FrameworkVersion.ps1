@@ -19,16 +19,6 @@ Function Get-FrameworkVersion
         Created:    25/09/2015
         Modified:   16/08/2018
         Version:  	1.4
-        Changes:  	1.1   Add    - Added NET Framework 4.6.1
-                    1.2   Change - Improved Parameters
-                    1.3   Change - Changed Parameter Hostname with ComputerName
-                    1.3.1 Add    - Added NET Framework 4.6.2
-                    1.3.2 Add    - Added NET Framework 4.7
-                          Add	 - Require Powershell 3.0
-                    1.3.3 Add    - Added NET Framework 4.7.2
-                    1.4   Add    - Added NET Framework 4.8
-                          Change - Code style improvement
-                          Add    - Function OutputType and parameter validation 
 
     .LINK
         https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/versions-and-dependencies

@@ -18,10 +18,6 @@ function Stop-RemoteProcess
         Created:    29/05/2018
         Modified:   11/12/2019
         Version:    1.1
-        Updates:    1.1     Add    - Added OutputType and Parameter validation
-                            Add    - Added support for -Verbose and -Whatif parameters
-                            Change - Complete code refactoring
-        To do:
     #>
     
     [OutputType([void])]

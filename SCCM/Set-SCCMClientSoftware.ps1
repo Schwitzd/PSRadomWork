@@ -18,8 +18,6 @@ Function Set-SCCMClientSoftware
         Created:    08/06/2018
         Modified:   30/12/2019
         Version:    1.1
-        Changes:    1.1     Change - Code Refactoring
-                            Change - Improved code quality with try/catch
     #>
 
     param (

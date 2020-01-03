@@ -21,7 +21,6 @@ Function Get-VMApplicationInfo
         Created:    03/01/2019
         Modified:   03/01/2019
         Version:    1.0
-        Changes:
     #>
 
     param (

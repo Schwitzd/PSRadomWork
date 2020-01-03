@@ -18,7 +18,6 @@
         Created:   28/11/2018
         Modified:  28/11/2018
         Version:   1.0
-        Changes:   
     #>
 
     [OutputType([System.Management.Automation.PSCustomObject])]

@@ -27,8 +27,6 @@
 	Created:	19/08/2016
 	Modified: 	29/11/2019  
 	Version: 	1.2
-	Changes:   	1.1		Add    - Added Validator for Path Parameter
-				1.2		Change - Code
 	#>
 
 	[CmdletBinding(SupportsShouldProcess)]

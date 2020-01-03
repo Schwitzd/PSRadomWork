@@ -19,7 +19,6 @@ Function Get-FoldersWithoutAccess
     Created:   14/11/2018
     Modified:  10/12/2019
     Version:   1.1
-    Changes:   1.1  Add    - Function OutputType and parameter validation
   #>
   
   param ( 

@@ -19,10 +19,6 @@ Function Invoke-SCCMClientActionsAll
         Created:    20/01/2018
         Modified:   20/12/2019
         Version:    1.3
-        Changes:    1.2     Change - Code style improvement
-                            Add    - Function OutputType and parameter validation
-                    1.3     Change - Rollback to Invoke-WmiMethod
-                            Change - Remove Test-Connection check
     #>
 
     [OutputType([void])]

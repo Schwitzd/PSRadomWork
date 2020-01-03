@@ -18,7 +18,6 @@ function Get-ACLNotInheritPermissions
     Created:    25/09/2019
     Modified:   25/09/2019
     Version:    1.1
-    Changes:    1.1   Change - Code restyle
   #>
 
   param ( 

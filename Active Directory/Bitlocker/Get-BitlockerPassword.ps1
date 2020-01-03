@@ -18,10 +18,6 @@ function Get-BitlockerPassword
     Created:    16/07/2019
     Modified:   10/12/2019
     Version:    1.1
-    Changes:    1.1   Change - converted to advanced function
-                      Add    - function enforced with try/catch
-                      Add    - parameter validation
-
   #> 
 
   [OutputType([Selected.Microsoft.ActiveDirectory.Management.ADObject])]

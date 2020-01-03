@@ -18,10 +18,7 @@ function Get-ADOuFromDN
     Author:     Daniel Schwitzgebel
     Created:    16/08/2018
     Modified:   02/01/2019
-    Version:    1.1
-    Changes:    1.1   Change  - code restyle
-                      Change  - Improved error handling 
-                      Add     - Added OutputType and ValueFromPipelineByPropertyName                       
+    Version:    1.1                      
   #>
 
   [OutputType([String])]

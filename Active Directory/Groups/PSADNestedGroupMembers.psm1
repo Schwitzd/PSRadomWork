@@ -21,17 +21,6 @@ function Get-ADNestedGroupMembers
         Created:    17/03/2016
         Modified:   27/12/2019
         Version:    2.4
-        Updates:    1.1     Add    - Group Info
-                    2.0     Add    - Created Dynamic Parameter for Tab-Completion
-                    2.1     Change - Improved Get-ADUser strings
-                    2.2     Add    - Added group details
-                    2.3     Change - Implemented Switch Statement
-                            Change - Improved Header layout
-                            Change - Removed duplicated function
-                            Add    - Added support for Computers groups and Mixed groups
-                    2.3.1   Change - Now is displayed the sAMAccountName of admins
-                    2.4     Add    - Added function OutputType
-                            Change - Code restyle
     #>
 
     [OutputType([String])]

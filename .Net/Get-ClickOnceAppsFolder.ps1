@@ -5,7 +5,6 @@
     Modified:       28/02/2019
     Version:        1.1
     Description:    Get ClickOnce App Folder
-    Updates:        1.1     Change - Code restyle
 #>
 
 begin 
