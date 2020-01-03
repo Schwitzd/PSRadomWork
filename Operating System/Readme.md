@@ -18,6 +18,10 @@
 
 * **Test-RegistryValue** - Test if a Registry value exist
 
+## Scheduled Tasks
+
+* **Get-ScheduledTasks** - Get the list of Schedule Tasks
+
 ## Users
 
 * **Clear-KerberosTickets** - This function will clear all Kerberos Tickets on a remote computer
