@@ -17,12 +17,13 @@ Function Match-VMDisksWinDisks
         Match-VMDisksWinDisks -vCenter vcenter01 -VM SQLServer1
     
     .NOTES 
-        Author:    Daniel Schwitzgebel
-        Created:   04/05/2016
-        Modified:  03/01/2019
-        Version:   1.1
-        Changes:   1.1  Change - Removed Snap-In
-                        Change - Replaced WMI with CIM
+        Author:     Daniel Schwitzgebel
+        Created:    04/05/2016
+        Modified:   03/01/2019
+        Version:    1.2
+        Changes:    1.1     Change - Removed Snap-In
+                            Change - Replaced WMI with CIM
+                            Add    - Converted to and Advanced Function
 
         Credits: Jacob Ludriks (https://gist.github.com/jacobludriks/a6356e89d54aad11cc4f#file-vmscsi-ps1)
 
@@ -43,50 +44,61 @@ Function Match-VMDisksWinDisks
         $VM
     )
 
-    try
-    { 
-        $null = Connect-VIServer -Server $vCenter -Force -ErrorAction Stop
-    }
-    catch
+    begin
     {
-       throw $_.Exception.Message
+        try
+        { 
+            $null = Connect-VIServer -Server $vCenter -Force -ErrorAction Stop
+        }
+        catch
+        {
+            throw $_.Exception.Message
+        }
+
+        $vmSummaries = @()
+        $diskMatches = @()
     }
 
-    $vmName = Get-VM $VM
-    $vmSummaries = @()
-    $diskMatches = @()
-    $vmView = Get-VM $VM | Get-View
-    foreach ($virtualSCSIController in ($vmView.Config.Hardware.Device | Where-Object { $_.DeviceInfo.Label -match 'SCSI Controller' }))
+    process
     {
-        foreach ($virtualDiskDevice  in ($vmView.Config.Hardware.Device | Where-Object { $_.ControllerKey -eq $virtualSCSIController.Key }))
+        $vmName = Get-VM $VM
+        $vmView = Get-VM $VM | Get-View
+        foreach ($virtualSCSIController in ($vmView.Config.Hardware.Device | Where-Object { $_.DeviceInfo.Label -match 'SCSI Controller' }))
         {
-            $vmSummary = '' | Select-Object VM, HostName, PowerState, DiskFile, DiskName, DiskSize, SCSIController, SCSITarget
-            $vmSummary.VM = $vmName.Name
-            $vmSummary.HostName = $vmView.Guest.HostName
-            $vmSummary.PowerState = $vmName.PowerState
-            $vmSummary.DiskFile = $virtualDiskDevice.Backing.FileName
-            $vmSummary.DiskName = $virtualDiskDevice.DeviceInfo.Label
-            $vmSummary.DiskSize = $virtualDiskDevice.CapacityInKB * 1KB
-            $vmSummary.SCSIController = $virtualSCSIController.BusNumber
-            $vmSummary.SCSITarget = $virtualDiskDevice.UnitNumber
-            $vmSummaries += $vmSummary
-        }
-    }
-    $disks = Get-CimInstance -Class Win32_DiskDrive -ComputerName $vmName.Name
-    $diff = $disks.SCSIPort | Sort-Object -Descending | Select-Object -Last 1 
-    foreach ($device in $vmSummaries)
-    {
-        $disks | ForEach-Object { if ((($_.SCSIPort - $diff) -eq $device.SCSIController) -and ($_.SCSITargetID -eq $device.SCSITarget))
+            foreach ($virtualDiskDevice  in ($vmView.Config.Hardware.Device | Where-Object { $_.ControllerKey -eq $virtualSCSIController.Key }))
             {
-                $DiskMatch = '' | Select-Object VMWareDisk, VMWareDiskSize, WindowsDeviceID, WindowsDiskSize 
-                $DiskMatch.VMWareDisk = $device.DiskName
-                $DiskMatch.WindowsDeviceID = $_.DeviceID.Substring(4)
-                $DiskMatch.VMWareDiskSize = $device.DiskSize / 1gb
-                $DiskMatch.WindowsDiskSize = [decimal]::round($_.Size / 1gb)
-                $diskMatches += $DiskMatch
+                $vmSummary = '' | Select-Object VM, HostName, PowerState, DiskFile, DiskName, DiskSize, SCSIController, SCSITarget
+                $vmSummary.VM = $vmName.Name
+                $vmSummary.HostName = $vmView.Guest.HostName
+                $vmSummary.PowerState = $vmName.PowerState
+                $vmSummary.DiskFile = $virtualDiskDevice.Backing.FileName
+                $vmSummary.DiskName = $virtualDiskDevice.DeviceInfo.Label
+                $vmSummary.DiskSize = $virtualDiskDevice.CapacityInKB * 1KB
+                $vmSummary.SCSIController = $virtualSCSIController.BusNumber
+                $vmSummary.SCSITarget = $virtualDiskDevice.UnitNumber
+                $vmSummaries += $vmSummary
+            }
+        }
+        $disks = Get-CimInstance -Class Win32_DiskDrive -ComputerName $vmName.Name
+        $diff = $disks.SCSIPort | Sort-Object -Descending | Select-Object -Last 1 
+        foreach ($device in $vmSummaries)
+        {
+            $disks | ForEach-Object { if ((($_.SCSIPort - $diff) -eq $device.SCSIController) -and ($_.SCSITargetID -eq $device.SCSITarget))
+                {
+                    $DiskMatch = '' | Select-Object VMWareDisk, VMWareDiskSize, WindowsDeviceID, WindowsDiskSize 
+                    $DiskMatch.VMWareDisk = $device.DiskName
+                    $DiskMatch.WindowsDeviceID = $_.DeviceID.Substring(4)
+                    $DiskMatch.VMWareDiskSize = $device.DiskSize / 1gb
+                    $DiskMatch.WindowsDiskSize = [decimal]::round($_.Size / 1gb)
+                    $diskMatches += $DiskMatch
+                }
             }
         }
     }
-    $diskMatches | Format-Table
-    $null = Disconnect-VIServer -Server $vCenter -Confirm:$false
+
+    end
+    {
+        $diskMatches | Format-Table
+        $null = Disconnect-VIServer -Server $vCenter -Confirm:$false  
+    }
 }
