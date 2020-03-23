@@ -6,6 +6,7 @@ On every folder a brief description of the scripts.
 ## Contents
 
 * [Active Directory](Active%20Directory)
+* [DNS](DNS)
 * [File Systems](File%20Systems)
 * [IIS](IIS)
 * [Internet](Internet)
