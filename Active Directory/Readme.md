@@ -17,4 +17,5 @@
 
 * **Convert-SIDToUsername** - Convert a SID to username
 * **Get-UserLogon** - This function will get the logged in user in specific computer
+* **Get-UsersWithSoonPwdExpiration** - Get the users that password will expire soon
 * **Resolve-UserAccountControl** - Return the user UAC flags
