@@ -15,6 +15,7 @@
 * **New-DummyFile** - This function create a dummy file with a custom size
 * **Update-StringInFile** - Replace a string in one or multiple files
 
-## Paths
+## Folders
 
 * **Get-LongPathNames** - This function will get the list of file and folder with long path
+* **Get-SharedFolder** - Create a new shared folder with share permission

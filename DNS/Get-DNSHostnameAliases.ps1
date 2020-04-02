@@ -30,17 +30,17 @@ function Get-DNSHostnameAliases
     [CmdletBinding()]
     param ( 
         [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty]
+        [ValidateNotNullOrEmpty()]
         [String]
         $DNSServer,
       
         [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty]
+        [ValidateNotNullOrEmpty()]
         [String]
         $DNSZone,
       
         [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty]
+        [ValidateNotNullOrEmpty()]
         [String]
         $Hostname
     )
