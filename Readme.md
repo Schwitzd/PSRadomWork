@@ -8,6 +8,7 @@ On every folder a brief description of the scripts.
 * [Active Directory](Active%20Directory)
 * [DNS](DNS)
 * [File Systems](File%20Systems)
+* [Hardware](Hardware)
 * [IIS](IIS)
 * [Internet](Internet)
 * [Networking](Networking)
