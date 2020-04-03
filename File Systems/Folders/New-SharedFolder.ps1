@@ -85,7 +85,7 @@ function New-SharedFolder
         }
         catch 
         {
-            throw "Failed to create $ShareName"
+            throw "Failed to create $($ShareName)"
         }
 
         try
@@ -94,7 +94,7 @@ function New-SharedFolder
         }
         catch
         {
-            throw 'Failed to remove Everyone permission to the Share'
+            throw 'Failed to remove Everyone permission on the share'
         }
     }
 }
