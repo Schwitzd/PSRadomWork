@@ -4,6 +4,10 @@
 
 * **Get-BitlockerPassword** - This function will get the Bitlocker Password for a specific computer
 
+## Computers
+
+* **Get-ComputerOwner** - Search in Active Directory and get User ID from Name or Surname
+
 ## Groups
 
 * **Get-ADMemberOf** - Get Members of for a computer or user
