@@ -13,6 +13,7 @@
 ## Profile
 
 * **Get-UserProfilePath** - This function find the path of a user profile based on a number of different criteria
+* **Remove-ProfileItem** - This function removes a file(s) or folder(s) with the same path in all user profiles
 
 ## Process
 
