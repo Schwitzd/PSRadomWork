@@ -10,6 +10,10 @@
 * **Get-ShutdownReasons** - Export all the shutdown reasons within the asked period in HTML Report
 * **Get-StartUpShutdown** - This function will get the Startup and Shutdown datetime
 
+## Profile
+
+* **Get-UserProfilePath** - This function find the path of a user profile based on a number of different criteria
+
 ## Process
 
 * **Stop-RemoteProcess** - Get the list of processes running on a remote computer and kill the selected
