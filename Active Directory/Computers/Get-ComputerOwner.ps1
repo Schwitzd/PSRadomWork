@@ -25,7 +25,7 @@ function Get-ComputerOwner
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADComputer])]
-  param(
+  param (
     [Parameter()]
     [ValidateNotNullOrEmpty()]
     [String]

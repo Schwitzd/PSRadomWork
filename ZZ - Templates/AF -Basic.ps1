@@ -28,7 +28,7 @@
 
     [OutputType([Void])]
     [CmdletBinding(DefaultParameterSetName = 'Param1')]
-    param(
+    param (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]

@@ -28,7 +28,7 @@ Function Get-FrameworkVersion
     #Requires -Version 3.0 
 
     [OutputType([PSCustomObject])] 
-    param(
+    param (
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [String[]]

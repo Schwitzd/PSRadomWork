@@ -23,7 +23,7 @@ Function Get-UserLogon
   #>
   
   [OutputType([System.Management.Automation.PSCustomObject])] 
-  param( 
+  param ( 
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()] 
     [String]

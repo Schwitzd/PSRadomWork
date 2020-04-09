@@ -25,7 +25,7 @@ function Get-ADMemberOf
     #> 
 
     [CmdletBinding(DefaultParameterSetName = 'Username')]
-    param(
+    param (
         [Parameter(ParameterSetName = 'Username')]
         [ValidateNotNullOrEmpty()]
         [String]
