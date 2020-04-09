@@ -2,33 +2,39 @@ function Get-DNSHostnameAliases
 {
     <# 
     .SYNOPSIS 
-        Get all DNS Aliases for a given Hostname.
+        Get all DNS Aliases for a given computer name.
     
     .DESCRIPTION 
-        Get all DNS Aliases for a given Hostname by querying the specified DNS Zone.
+        Get all DNS Aliases for a given computer name by querying the specified DNS Zone.
     
+    .PARAMETER ComputerName
+        Specified the computer name to lookup.
+
     .PARAMETER DNSServer
-        Name of the DNS Server to query. 
+        Specified the DNS Server name. 
     
     .PARAMETER DNSZone
-        Name of the DNS Zone.
-
-    .PARAMETER Hostname
-        Name of the Hostname to lookup.
+        Specified the name of the DNS Zone.
       
     .EXAMPLE 
-        PS C:\> Get-DNSHostnameAliases -DNSServer foo -DNSZone foo_zone -Hostname bar
+        PS C:\> Get-DNSHostnameAliases -DNSServer foo -DNSZone foo_zone -ComputerName bar
+        This command get aa the DNS Aliases for a given computer name.
     
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    23/03/2020
-        Modified:   23/03/2020
-        Version:    1.0
+        Modified:   09/04/2020
+        Version:    1.0.1
 
   #> 
 
     [CmdletBinding()]
-    param ( 
+    param (
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [String]
+        $ComputerName,
+
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]
@@ -37,27 +43,17 @@ function Get-DNSHostnameAliases
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]
-        $DNSZone,
-      
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [String]
-        $Hostname
+        $DNSZone
     )
 
-    begin
-    {
-    }
- 
     process
     {
         try
         {
             Get-DnsServerResourceRecord -ZoneName $DNSZone -ComputerName $DNSServer | 
-                Where-Object { $_.RecordData.HostNameAlias -like "$Hostname*" } | 
+                Where-Object { $_.RecordData.HostNameAlias -like "$ComputerName*" } | 
                     Select-Object Hostname -ExpandProperty RecordData
         }
-
         catch
         {
             throw 'failed to query the DNS Server or RSAT DNS Server not installed'
