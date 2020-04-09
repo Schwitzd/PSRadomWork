@@ -9,16 +9,17 @@ Function Get-FoldersWithoutAccess
     This means that output will be the folders without permissions.
   
   .PARAMETER Path
-    Path Name.
+    Specified the path.
   
   .EXAMPLE 
     PS C:\> Get-FoldersWithoutAccess -Path C:\temp
+    This command gets the path of the folders without permissions. 
 
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   14/11/2018
-    Modified:  10/12/2019
-    Version:   1.1
+    Modified:  09/04/2020
+    Version:   1.1.1
   #>
   
   param ( 

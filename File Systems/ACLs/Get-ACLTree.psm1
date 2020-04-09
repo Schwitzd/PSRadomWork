@@ -142,7 +142,6 @@ function Get-ACLTree
         [ValidateNotNullOrEmpty()]
         [string[]]
         $Path
-        
     )
 
     $Path | Get-ACLTreeInternal -MaxDepth $MaxDepth
