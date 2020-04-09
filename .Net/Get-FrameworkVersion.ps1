@@ -9,16 +9,17 @@ Function Get-FrameworkVersion
         Admin right are required to run this script!
     
     .PARAMETER ComputerName 
-        ComputerName to get framework version
+        Specifies the computers on which the command runs.
     
     .EXAMPLE 
-        Get-FrameworkVersion -ComputerName foo
+        PS C:\> Get-FrameworkVersion -ComputerName foo
+        This Command gets all the .Net Framework versions installed on the computer.
     
     .NOTES 
         Author:   	Daniel Schwitzgebel 
         Created:    25/09/2015
-        Modified:   16/08/2018
-        Version:  	1.4
+        Modified:   09/04/2020
+        Version:  	1.4.1
 
     .LINK
         https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/versions-and-dependencies
