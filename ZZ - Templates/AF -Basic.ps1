@@ -8,10 +8,10 @@
         A detailed description of the Get-Something function.
     
     .PARAMETER Foo
-        A single Computer or an array of computer names. Default is localhost. 
+        Specifies a single Computer or an array of computer names. Default is localhost. 
     
     .PARAMETER Bar
-        A description of the Path parameter.
+        Specifies a description of the Path parameter.
 
     .EXAMPLE 
         PS C:\> Get-Something -ComputerName $value1 -Path $value2
