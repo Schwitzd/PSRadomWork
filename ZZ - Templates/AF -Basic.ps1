@@ -15,7 +15,7 @@
 
     .EXAMPLE 
         PS C:\> Get-Something -ComputerName $value1 -Path $value2
-        This is the example description
+        This command gets all...
     
     .NOTES 
         Author:     Daniel Schwitzgebel
