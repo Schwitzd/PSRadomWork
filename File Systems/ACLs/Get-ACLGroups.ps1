@@ -7,23 +7,26 @@ Function Get-aclGroups
   .DESCRIPTION 
     Get all ACL Groups for a Directory and its subfolders.
   
-  .PARAMETER Path
-    Path Name.
-  
   .PARAMETER Depth
-    Subfolders level, default is 2.
+    Specifies the subfolders level, default is 2.
+
+  .PARAMETER Path
+   Specifies the path name.
     
   .EXAMPLE 
-    PS C:\> Get-aclGroups -Path C:\temp -Depth 2
+    PS C:\> Get-aclGroups -Path 'C:\temp' -Depth 2
+    This command gets all the ACL groups for the given path.
 
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   25/09/2018
-    Modified:  25/09/2018
-    Version:   1.1
+    Modified:  09/04/2020
+    Version:   1.2
   #>
   
-  param ( 
+  [OutputType([System.Security.Principal.NTAccount])]
+  [CmdletBinding()]
+  param( 
     [Parameter(Mandatory)] 
     [String]
     $Path,
@@ -33,32 +36,42 @@ Function Get-aclGroups
     $Depth = 2
   )
 
-  $aclGroups = [System.Collections.ArrayList]@()
-  $identityExcluded = @(
-    'BUILTIN\Administrators',
-    'BUILTIN\Users',
-    'CREATOR OWNER',
-    'NT AUTHORITY\SYSTEM',
-    'NT AUTHORITY\Authenticated Users',
-    'HUGOBOSS\Domain Admins'
-  )
-
-  $folders = Get-ChildItem -Path $Path -Directory -Depth $Depth
-
-  foreach ($folder in $folders)
+  begin
   {
-    $acls = Get-Acl $folder.FullName
+    $aclGroups = [System.Collections.ArrayList]@()
+    $identityExcluded = @(
+      'BUILTIN\Administrators',
+      'BUILTIN\Users',
+      'CREATOR OWNER',
+      'NT AUTHORITY\SYSTEM',
+      'NT AUTHORITY\Authenticated Users',
+      "$env:USERDOMAIN\Domain Admins"
+    )
 
-    foreach ($ACL in $acls.Access)
+    $folders = Get-ChildItem -Path $Path -Directory -Depth $Depth
+  }
+  
+  process
+  {
+    foreach ($folder in $folders)
     {
-      if ($identityExcluded -notcontains $ACL.IdentityReference)
+      $acls = Get-Acl $folder.FullName
+
+      foreach ($acl in $acls.Access)
       {
-        if ($aclGroups -notcontains $ACL.IdentityReference)
+        if ($identityExcluded -notcontains $acl.IdentityReference)
         {
-          [void]$aclGroups.Add($ACL.IdentityReference)
+          if ($aclGroups -notcontains $acl.IdentityReference)
+          {
+            [void]$aclGroups.Add($acl.IdentityReference)
+          }
         }
       }
     }
   }
-  $aclGroups
+
+  end
+  {
+    $aclGroups
+  }  
 }
