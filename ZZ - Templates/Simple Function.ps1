@@ -25,7 +25,7 @@
     .LINK
   #> 
 
-    param ( 
+    param( 
         [Parameter(Mandatory)] 
         [String]
         $ComputerName,
