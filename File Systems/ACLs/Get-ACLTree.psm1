@@ -6,7 +6,7 @@
     #>
 
     [CmdletBinding()]
-    param (
+    param(
         [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
         [string]
@@ -114,11 +114,11 @@ function Get-ACLTree
     .DESCRIPTION 
     Get all ACL groups for a Directory and its subfolders in tree view and where the Inherited is interrupted.
     
-    .PARAMETER Path
-    Path Name.
-    
     .PARAMETER MaxDepth
-    Subfolders level, default is 0.
+    Specified the subfolders level, default is 0.
+
+    .PARAMETER Path
+    Specified the path.
     
     .EXAMPLE 
     PS C:\> Get-ACLTree -Path C:\temp -MaxDepth 2
@@ -126,22 +126,23 @@ function Get-ACLTree
     .NOTES 
     Author:     Daniel Schwitzgebel
     Created:    28/09/2019
-    Modified:   10/12/2019
-    Version:    1.1
+    Modified:   09/04/2020
+    Version:    1.1.1
 
     Credit: Lee Spottiswood (https://github.com/0x4c6565/PSTree)
     #>
 
     [CmdletBinding()]
-    Param
-    (
+    param(
+        [Parameter()]
+        [int]
+        $MaxDepth = 0,
+
         [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [ValidateNotNullOrEmpty()]
         [string[]]
-        $Path,
+        $Path
         
-        [int]
-        $MaxDepth = 0
     )
 
     $Path | Get-ACLTreeInternal -MaxDepth $MaxDepth
