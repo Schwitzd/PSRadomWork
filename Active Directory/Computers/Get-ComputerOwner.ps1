@@ -6,21 +6,22 @@ function Get-ComputerOwner
   
   .DESCRIPTION 
     Search in Active Directory and get User ID from Name or Surname.
-  
-  .PARAMETER Surname
-    Surname of the person. 
-  
+
   .PARAMETER Name
-    Name of the person.
+    Specifies the person's name.
+
+  .PARAMETER Surname
+    Specifies the person's surname. 
     
   .EXAMPLE 
     PS C:\> Get-UserID -Surname foo
+    This command gets the person's surname
   
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   23/05/2018
-    Modified:  10/12/2019
-    Version:   1.3.1
+    Modified:  09/04/2020
+    Version:   1.3.2
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADComputer])]
