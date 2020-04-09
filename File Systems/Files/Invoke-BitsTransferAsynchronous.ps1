@@ -54,7 +54,7 @@ function Invoke-BitsTransferAsynchronous
 
         [Parameter()]
         [ValidateSet('High', 'Normal', 'Low')]
-        [string]
+        [String]
         $Priority = 'Normal',
 
         [Parameter()]
@@ -110,7 +110,6 @@ function Invoke-BitsTransferAsynchronous
             } until ($bitsJob.JobState -eq 'Transferred')
 
             $bitsJob | Complete-BitsTransfer
-    
         }
         catch 
         {
