@@ -50,7 +50,7 @@ function Invoke-BitsTransferAsynchronous
 
     [OutputType([Void])]
     [CmdletBinding()]
-    Param(
+    param(
         [Parameter(Mandatory)]
         [String]
         $Source,
