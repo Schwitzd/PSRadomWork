@@ -12,6 +12,7 @@
 * **Find-LockedFileProcess** - This function help track down a process that is locking down a file you are trying access
 * **Get-FilesOlderThan** - Returns files from within a directory and optionally subdirectories that are older than a specified period
 * **Get-RecentModifiedFiles** - Get most recent modified files in a folder structure
+* **Invoke-BitsTransferAsynchronous** - This cmdlet create a BITS transfer job to transfer a file between a client and a server.
 * **New-DummyFile** - This function create a dummy file with a custom size
 * **Update-StringInFile** - Replace a string in one or multiple files
 
