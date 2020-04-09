@@ -2,26 +2,27 @@ function Find-LockedFileProcess
 {
   <#
   .SYNOPSIS 
-    This function help track down a process that is locking down a file you are trying access
+    This function help track down a process that is locking down a file you are trying access.
   
   .DESCRIPTION 
     This function help track down a process that is locking down a file you are trying access.
-    Is used Handle64.exe tool from Microsoft Sysinternal 
+    Is used Handle64.exe tool from Microsoft Sysinternal.
   
   .PARAMETER FileName 
-    Name of the file to check
+    Specifies the name of the file to check.
 
   .PARAMETER HandleFilePath
-    Path to handle64.exe
+    Specifies the path to handle64.exe.
 
   .EXAMPLE 
-    Find-LockedFileProcess -FileName computers.txt
+    PS C:\> Find-LockedFileProcess -FileName computers.txt
+    This command gets the process that lock the given file.
   
   .NOTES 
     Author:     Daniel Schwitzgebel
     Created:    26/03/2018
-    Modified:   20/12/2019
-    Version:    1.1
+    Modified:   09/04/2020
+    Version:    1.1.1
   #> 
 
   [OutputType([System.Management.Automation.PSCustomObject])]
@@ -38,7 +39,7 @@ function Find-LockedFileProcess
     $HandleFilePath
   )
     
-  if (Test-Path $HandleFilePath)
+  if (Test-Path -Path $HandleFilePath)
   {
     [regex]$matchPattern = '(?<Name>\w+\.\w+)\s+pid:\s+(?<PID>\b(\d+)\b)\s+type:\s+(?<Type>\w+)\s+\w+:\s+(?<Path>.*)'
  
@@ -64,6 +65,6 @@ function Find-LockedFileProcess
   }
   else
   {
-    Write-Warning 'No handle.exe found'
+    throw 'No handle.exe found'
   }
 }

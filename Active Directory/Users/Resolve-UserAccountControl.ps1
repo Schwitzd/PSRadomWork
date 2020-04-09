@@ -20,7 +20,7 @@ Function Resolve-UserAccountControl
         Modified:  09/04/2020
         Version:   1.0.1
   #>
-    param(
+    param (
         [Parameter(Mandatory)]
         [string]
         $Username

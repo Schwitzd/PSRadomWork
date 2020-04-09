@@ -133,7 +133,7 @@ function Get-ACLTree
     #>
 
     [CmdletBinding()]
-    param(
+    param (
         [Parameter()]
         [int]
         $MaxDepth = 0,

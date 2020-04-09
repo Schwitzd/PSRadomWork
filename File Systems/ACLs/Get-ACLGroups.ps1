@@ -26,7 +26,7 @@ Function Get-aclGroups
   
   [OutputType([System.Security.Principal.NTAccount])]
   [CmdletBinding()]
-  param( 
+  param ( 
     [Parameter(Mandatory)] 
     [String]
     $Path,
