@@ -7,14 +7,22 @@
     .DESCRIPTION 
         A detailed description of the Get-Something function.
     
-    .PARAMETER ComputerName
+    .PARAMETER Foo
         A single Computer or an array of computer names. Default is localhost. 
     
-    .PARAMETER Path
+    .PARAMETER Bar
         A description of the Path parameter.
       
+    .PARAMETER ValidateSet
+        A description. The acceptable values for this parameter are:
+
+        -- Value1 (?default?): description.
+
+        -- value2: description.
+
     .EXAMPLE 
         PS C:\> Get-Something -ComputerName $value1 -Path $value2
+        This is the example description
     
     .NOTES 
         Author:     Daniel Schwitzgebel
@@ -29,12 +37,19 @@
     [CmdletBinding()]
     param ( 
         [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
         [String]
-        $ComputerName,
+        $Foo,
+
+        [Parameter(Mandatory)]
+        [ValidateSet('Value1', 'Value2')]
+        [String]
+        $ValidateSet,
       
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [String]
-        $Path
+        $Bar
     )
 
     begin
@@ -49,7 +64,6 @@
         {
             
         }
-
         catch
         {
 
