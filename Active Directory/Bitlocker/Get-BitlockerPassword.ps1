@@ -8,16 +8,17 @@ function Get-BitlockerPassword
     This function will get the Bitlocker Password for a specific computer.
   
   .PARAMETER ComputerName 
-    Name of the computer.
+    Specifies the computer name.
     
   .EXAMPLE 
-    Get-BitlockerPassword -ComputerName foo
+    PS C:\> Get-BitlockerPassword -ComputerName foo
+    This command gets the Bitlocker password for the foo computer.
   
   .NOTES 
     Author:     Daniel Schwitzgebel 
     Created:    16/07/2019
-    Modified:   10/12/2019
-    Version:    1.1
+    Modified:   09/04/2020
+    Version:    1.1.1
   #> 
 
   [OutputType([Selected.Microsoft.ActiveDirectory.Management.ADObject])]
