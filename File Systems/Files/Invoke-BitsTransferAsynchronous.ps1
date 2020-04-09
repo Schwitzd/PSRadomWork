@@ -8,9 +8,6 @@ function Invoke-BitsTransferAsynchronous
     .DESCRIPTION
         This cmdlet create a BITS transfer job in asynchronous mode to transfer a file between a client and a server.
 
-    .PARAMETER Source
-        Specifies the source location and the name of the file that you want to transfer.
-    
     .PARAMETER Destination
         Specifies the destination location.
 
@@ -26,6 +23,16 @@ function Invoke-BitsTransferAsynchronous
 
     .PARAMETER Proxy
         Specifies the Proxy server with port to use.
+
+    .PARAMETER Source
+        Specifies the source location and the name of the file that you want to transfer.
+
+    .PARAMETER TransferType
+        Specifies the BITS transfer job type. The acceptable values for this parameter are:
+
+        -- Download (default): Specifies that the transfer job downloads files to the client computer.
+
+        -- Upload: Specifies that the transfer job uploads a file to the server.
 
     .EXAMPLE 
         PS C:\> Invoke-BitsTransferAsynchronous -Source 'https://www.foo.com/bar.iso' -Destination '\\foo\c$\temp' -Priority 'Low' -Proxy 'myproxy:8080'
