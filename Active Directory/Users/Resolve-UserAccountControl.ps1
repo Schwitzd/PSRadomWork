@@ -1,13 +1,33 @@
-Function Resolve-UserAccountControl()
+Function Resolve-UserAccountControl
 {
-
+    <#
+    .SYNOPSIS 
+        This function will get the user account control flags.
+  
+    .DESCRIPTION 
+        This function will get the user account control flags.
+    
+    .PARAMETER Username 
+        Specified the username.
+    
+    .EXAMPLE 
+        PS C:\> Resolve-UserAccountControl -Username foo
+        This command get all the user account flags.
+  
+    .NOTES 
+        Author:    Daniel Schwitzgebel
+        Created:   10/03/2018
+        Modified:  09/04/2020
+        Version:   1.0.1
+  #>
     param(
         [Parameter(Mandatory)]
         [string]
         $Username
     )
 
-    begin {
+    begin
+    {
         $uacPropertyFlags = @(
             'SCRIPT',
             'ACCOUNTDISABLE',
@@ -46,7 +66,8 @@ Function Resolve-UserAccountControl()
         $userUAC = (Get-ADUser -Identity $Username -Properties useraccountcontrol).useraccountcontrol
     }
 
-    process {
+    process
+    {
         $flags = New-Object System.Collections.Generic.List[System.Object]
         foreach ($i in $uacPropertyFlags)
         {
@@ -57,7 +78,8 @@ Function Resolve-UserAccountControl()
         }
     }
              
-    end {
+    end
+    {
         $flags    
     }
 }  

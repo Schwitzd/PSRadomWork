@@ -13,14 +13,18 @@ function Get-ADNestedGroupMembers
         Function enumerates members of a given AD group recursively along with nesting level and parent group information. 
         It also displays if each user account is disabled. 
     
+    .PARAMETER SearchGroup
+        Specifies the group name.
+
     .EXAMPLE
-        Get-ADNestedGroupMembers MyGroup
+        PS C:\> Get-ADNestedGroupMembers -SearchGroup MyGroup
+        This command gets the all the members of the group 'MyGroup'
 
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    17/03/2016
-        Modified:   27/12/2019
-        Version:    2.4
+        Modified:   09/04/2020
+        Version:    2.4.1
     #>
 
     [OutputType([String])]
@@ -110,17 +114,23 @@ function Export-ADNestedGroupMembers
     .DESCRIPTION
         Function export members of a given AD group recursively along with nesting level and parent group information. 
         It also displays if each user account is disabled. 
+
+
+    .PARAMETER ExportFile
+        Specifies the file name where the group members will be exported.
+
+    .PARAMETER SearchGroup
+        Specifies the group name.
     
     .EXAMPLE   
-        Export-ADNestedGroupMembers MyGroup
+        PS C:\> Export-ADNestedGroupMembers -SearchGroup MyGroup -ExportFile 'c:\temp\export.txt'
+        This command export all the group members of 'MyGroup' on a txt file.
 
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    17/03/2016
         Modified:   27/12/2019
-        Version:    1.1
-        Updates:    1.1     Add    - Added function OutputType
-                            Change - Code restyle
+        Version:    1.1.1
     #>
 
     [OutputType([void])]

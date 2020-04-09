@@ -8,19 +8,20 @@ function Get-ADMemberOf
         Get Members of for a Computer or User.
     
     .PARAMETER ComputerName
-        A single Computer name.
+        Specifies a computer name.
     
     .PARAMETER Username
-        Name of the person.
+        Specifies an username.
     
     .EXAMPLE 
        PS C:\> Get-ADMemberOf -Username foo
+       This command gets the groups for user foo.
     
     .NOTES 
         Author:    Daniel Schwitzgebel
         Created:   31/08/2018
-        Modified:  22/05/2019
-        Version:   1.3.2
+        Modified:  09/04/2020
+        Version:   1.3.3
     #> 
 
     [CmdletBinding(DefaultParameterSetName = 'Username')]

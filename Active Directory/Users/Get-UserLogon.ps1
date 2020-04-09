@@ -7,19 +7,19 @@ Function Get-UserLogon
   .DESCRIPTION 
     This function will get the logged in user in specific computer, query is done with WinRM,
     then a cross check is done with active directory.
-    Admin right are required to run this script!
   
   .PARAMETER ComputerName 
-    ComputerName to check the logged in user.
+    Specified the computer name to check the logged in user.
     
   .EXAMPLE 
-    Get-UserLogon -ComputerName foo.
+    PS C:\> Get-UserLogon -ComputerName foo
+    This command get the users sessions for a given computer name.
   
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   10/03/2018
-    Modified:  10/12/2019
-    Version:   1.2
+    Modified:  09/04/2020
+    Version:   1.2.1
   #>
   
   [OutputType([System.Management.Automation.PSCustomObject])] 

@@ -9,16 +9,17 @@ function Get-ADOuFromDN
     Get-ADComputer and this function will return the OU DN of the object.
   
   .PARAMETER DistinguishedName
-    Object DistinguishedName to parse.
+    Specifies the DistinguishedName to parse.
   
   .EXAMPLE 
-    (Get-ADUser -Identity foo).DistinguishedName | Get-ADOuFromDN
+    PS C:\> (Get-ADUser -Identity foo).DistinguishedName | Get-ADOuFromDN
+    This command gets the DistinguishedName.    
   
   .NOTES 
     Author:     Daniel Schwitzgebel
     Created:    16/08/2018
-    Modified:   02/01/2019
-    Version:    1.1                      
+    Modified:   09/04/2020
+    Version:    1.1.1                  
   #>
 
   [OutputType([String])]

@@ -9,16 +9,17 @@ Function Convert-SIDToUsername
     Convert a SID to Username and display additional user information.
   
   .PARAMETER SID
-    User SID. 
+    Specifies the username SID. 
     
   .EXAMPLE 
     PS C:\> Convert-SIDToUsername -SID $value1
+    This command convert the SID to the username.
   
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   28/02/2017
-    Modified:  10/12/2019
-    Version:   1.1
+    Modified:  09/04/2020
+    Version:   1.1.1
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADUser])]
