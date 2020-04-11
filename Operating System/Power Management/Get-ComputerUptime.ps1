@@ -18,10 +18,11 @@ function Get-ComputerUptime
     Author:    Daniel Schwitzgebel
     Created:   27/04/2012
     Modified:  11/04/2020
-    Version:   1.5.1
+    Version:   1.6
   #>
 
-  [OutputType([String])] 
+  [OutputType([String])]
+  [CmdLetBinding()]
   param ( 
     [Parameter(Mandatory)] 
     [ValidateNotNullOrEmpty()]
@@ -29,17 +30,21 @@ function Get-ComputerUptime
     $ComputerName
   ) 
 
-  if (Test-NetConnection $ComputerName -InformationLevel Quiet)
+  process
   {
-    $hostUptime = (Get-CimInstance -Class Win32_OperatingSystem -Computername $ComputerName).LastBootUpTime
-    $uptime = (Get-Date) - $hostUptime
-    $hostUptime = '{0:dd/MM/yyyy hh:mm:ss}' -f $hostUptime
+    try
+    {
+      $hostUptime = (Get-CimInstance -Class Win32_OperatingSystem -Computername $ComputerName).LastBootUpTime
+      $uptime = (Get-Date) - $hostUptime
+      $hostUptime = '{0:dd/MM/yyyy hh:mm:ss}' -f $hostUptime
 
-    Write-Output "Power on: $hostUptime"
-    Write-Output "Uptime is: $($uptime.days) days $($uptime.hours) hours $($uptime.minutes) minutes $($uptime.seconds) seconds"
-  } 
-  else
-  {
-    Write-Warning "$ComputerName is offline"
-  } 
+      Write-Output "Power on: $hostUptime"
+      Write-Output "Uptime is: $($uptime.days) days $($uptime.hours) hours $($uptime.minutes) minutes $($uptime.seconds) seconds"
+    } 
+    catch
+    {
+      throw "Failed to connect to $ComputerName."
+    }
+  }
+   
 }
