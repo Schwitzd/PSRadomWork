@@ -1,4 +1,4 @@
-Function Get-SCCMClientStatus
+function Get-SCCMClientStatus
 {
   <#
   .SYNOPSIS
