@@ -59,9 +59,9 @@ Function Get-FrameworkVersion
         528049 = '.NET Framework 4.8 (all other OS versions)'
     }
 
-    foreach ($Computer in $ComputerName)
+    foreach ($computer in $ComputerName)
     {
-        if ($regKey = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey('LocalMachine', $Computer))
+        if ($regKey = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey('LocalMachine', $computer))
         {
             if ($netRegKey = $regKey.OpenSubKey("$dotNetRegistry"))
             {
@@ -72,7 +72,7 @@ Function Get-FrameworkVersion
                         $versionKey = $netRegKey.OpenSubKey($versionKeyName)
                         $version = [version]($versionKey.GetValue('Version', ''))
                         New-Object -TypeName PSObject -Property @{
-                            ComputerName     = $Computer
+                            ComputerName     = $computer
                             Builds           = $version.Build
                             FrameworkVersion = '.NET Framework ' + $version.Major + '.' + $version.Minor
                         } | Select-Object ComputerName, FrameworkVersion, Builds
@@ -86,7 +86,7 @@ Function Get-FrameworkVersion
                     $net4Release = 30319
                 }
                 New-Object -TypeName PSObject -Property @{
-                    ComputerName     = $Computer
+                    ComputerName     = $computer
                     Builds           = $net4Release
                     FrameworkVersion = $dotNet4Builds[$net4Release]
                 } | Select-Object ComputerName, FrameworkVersion, Builds
