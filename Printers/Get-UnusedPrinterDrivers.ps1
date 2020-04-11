@@ -2,22 +2,23 @@
 {
   <#
   .SYNOPSIS 
-    Get the unused printer drivers.
+    This function will get the unused printer drivers.
   
   .DESCRIPTION 
-    Get a list of unused printer drivers on a specified Print Server.
+    This function will get a list of unused printer drivers on a specified Print Server.
   
-  .PARAMETER PrintServerName
-    Hostname of the Print Server.
+  .PARAMETER ComputerName
+    Specifies the print server name.
     
   .EXAMPLE 
-    PS C:\> Get-UnusedPrinterdrivers -PrintServerName foo
+    PS C:\> Get-UnusedPrinterdrivers -ComputerName foo
+    This command gets the unused printer driver on a given print server.
   
   .NOTES 
     Author:     Daniel Schwitzgebel
     Created:    18/08/2016
-    Modified:   18/09/2019
-    Version:    1.1
+    Modified:   11/04/2020
+    Version:    1.2
   #>
 
   [OutputType([String])]
@@ -25,13 +26,13 @@
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
     [string]
-    $PrintServerName
+    $ComputerName
   )
 
   $arrPrtdrivers = @()
 
-  $drivers = Get-CimInstance -ClassName Win32_PrinterDriver -ComputerName $PrintServerName
-  $printers = Get-CimInstance -ClassName Win32_Printer -ComputerName $PrintServerName
+  $drivers = Get-CimInstance -ClassName Win32_PrinterDriver -ComputerName $ComputerName
+  $printers = Get-CimInstance -ClassName Win32_Printer -ComputerName $ComputerName
 
   foreach ($printer in $printers)
   {
