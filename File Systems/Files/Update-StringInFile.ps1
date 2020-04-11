@@ -2,35 +2,45 @@
 {
 	<#
 	.SYNOPSIS
-	Replace a string in one or multiple files.
+		Replace a string in one or multiple files.
 					
 	.DESCRIPTION         
-	Replace a string in one or multiple files. Binary file not touched by this script.
-
-	.PARAMETER Path
-	Folder where the files are stored, will search recursive.
-
-	.PARAMETER Find
-	String to find.
-
-	.PARAMETER ReplaceWith
-	String to replace.
+		Replace a string in one or multiple files. Binary file not touched by this script.
 
 	.PARAMETER CaseSensitive
-	String must be case sensitive, default is false.
+		Specifies if the string must be case sensitive, default is false.
+
+	.PARAMETER Find
+		Specifies the string to find.
+
+	.PARAMETER Path
+		Specifies the folder where the files are stored, will search recursive.
+
+	.PARAMETER ReplaceWith
+		Specifies the string to replace.
 								
 	.EXAMPLE
-	Update-StringInFile -Path E:\Temp\Files\ -Find 'Test1' -ReplaceWith 'Test2' -Verbose
+		PS C:\> Update-StringInFile -Path E:\Temp\Files\ -Find 'Test1' -ReplaceWith 'Test2' -Verbose
+		This command replace the string 'Test1' with 'Test2' in verbose mode.
 
 	.NOTES 
-	Author:		Daniel Schwitzgebel
-	Created:	19/08/2016
-	Modified: 	29/11/2019  
-	Version: 	1.2
+		Author:		Daniel Schwitzgebel
+		Created:	19/08/2016
+		Modified: 	11/04/2020  
+		Version: 	1.2.1
 	#>
 
 	[CmdletBinding(SupportsShouldProcess)]
-	Param(
+	param (
+		[Parameter()]
+		[switch]
+		$CaseSensitive = $false,
+
+		[Parameter(Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[String]
+		$Find,
+
 		[Parameter(Mandatory)]
 		[ValidateScript( {
 				if (-not (Test-Path -Path $_))
@@ -40,20 +50,11 @@
 			})]
 		[String]
 		$Path,
-
-		[Parameter(Mandatory)]
-		[ValidateNotNullOrEmpty()]
-		[String]
-		$Find,
 	
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
 		[String]
-		$ReplaceWith,
-
-		[Parameter()]
-		[switch]
-		$CaseSensitive = $false
+		$ReplaceWith
 	)
 
 	process
@@ -62,7 +63,8 @@
 
 		$files = Get-ChildItem -Path $Path -Recurse | 
 			Where-Object { ($_.PSIsContainer -eq $false) -and ((Test-IsFileBinary -Path $_.FullName) -eq $false) } | 
-				Select-String -Pattern ([regex]::Escape($Find)) -CaseSensitive:$CaseSensitive | Group-Object Path 
+				Select-String -Pattern ([regex]::Escape($Find)) -CaseSensitive:$CaseSensitive | 
+					Group-Object Path 
 		
 	Write-Verbose -Message "Total files with string to replace found: $($Files.Count)"
 
@@ -75,11 +77,13 @@
 		{
 			if ($CaseSensitive)
 			{
-				(Get-Content -Path $File.Name) -creplace [regex]::Escape($Find), $ReplaceWith | Set-Content -Path $File.Name -Force
+				(Get-Content -Path $File.Name) -creplace [regex]::Escape($Find), $ReplaceWith | 
+					Set-Content -Path $File.Name -Force
 			}
 			else
 			{
-				(Get-Content -Path $File.Name) -replace [regex]::Escape($Find), $ReplaceWith | Set-Content -Path $File.Name -Force
+				(Get-Content -Path $File.Name) -replace [regex]::Escape($Find), $ReplaceWith | 
+					Set-Content -Path $File.Name -Force
 			}
 		}
 		catch

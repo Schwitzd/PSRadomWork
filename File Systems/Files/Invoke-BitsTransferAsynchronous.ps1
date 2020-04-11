@@ -50,11 +50,7 @@ function Invoke-BitsTransferAsynchronous
 
     [OutputType([Void])]
     [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)]
-        [String]
-        $Source,
-
+    param (
         [Parameter(Mandatory)]
         [String]
         $Destination,
@@ -65,12 +61,16 @@ function Invoke-BitsTransferAsynchronous
         $Priority = 'Normal',
 
         [Parameter()]
-        [ValidateSet('Download' , 'Upload')]
-        $TransferType = 'Download',
+        [String]
+        $Proxy,
+
+        [Parameter(Mandatory)]
+        [String]
+        $Source,
 
         [Parameter()]
-        [String]
-        $Proxy
+        [ValidateSet('Download' , 'Upload')]
+        $TransferType = 'Download'
     )
 
     process

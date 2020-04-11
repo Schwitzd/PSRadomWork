@@ -8,19 +8,20 @@
     This function create a dummy file with a custom size.
 
   .PARAMETER FilePath 
-    Path and file name
+    Specifies the path and file name.
 
   .PARAMETER Size 
-    Size of the Dummy file
+    Specifies the size of the Dummy file.
     
   .EXAMPLE
-    New-DummyFile -FilePath C:\Temp\1.dummy -Size 1gb
+    PS C:\> New-DummyFile -FilePath C:\Temp\1.dummy -Size 1gb
+    This command creates a new Dummy file of 1Gb size.
   
   .NOTES 
     Author:     Daniel Schwitzgebel
     Created:    07/08/2014
-    Modified:   27/12/2019
-    Version:    1.3.1
+    Modified:   11/04/2020
+    Version:    1.3.2
   #>
 
   [OutputType([void])]

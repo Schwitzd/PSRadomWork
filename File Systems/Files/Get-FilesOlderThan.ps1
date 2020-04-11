@@ -7,9 +7,6 @@ function Get-FilesOlderThan
   .DESCRIPTION
     Returns files from within a directory and optionally subdirectories that are older than a specified period.
 
-  .PARAMETER Path
-    Specifies the path the function should begin searching.
-    
   .PARAMETER Days
     Specifies the number of days to find files older than.
 
@@ -17,15 +14,18 @@ function Get-FilesOlderThan
     Specifies the file types to be included in the search, by default all file types are 
     included however this can be filtered by supplying an array of file extensions to include.
 
+  .PARAMETER Log
+    log the output to a file, location is 'c:\temp\FilesOlderThan.log'.
+
+  .PARAMETER Path
+    Specifies the path the function should begin searching.
+
   .PARAMETER Top
     Specifies the Top X bigger file to find.
 
   .PARAMETER Unit
     Specifies the Unit to convert the size of files, the value are ('KB', 'MB', 'GB') by default is KB.
     
-  .PARAMETER Log
-    log the output to a file, location is 'c:\temp\FilesOlderThan.log'.
-
   .EXAMPLE 
     PS C:\> Get-FilesOlderThan -Path E:\data -Days 360 -Top 10
     This command returns the top 10 biggest files older than 360 days.
@@ -47,18 +47,22 @@ function Get-FilesOlderThan
 
   [CmdletBinding()] 
   [OutputType([Object])]    
-  param( 
-    [parameter(ValueFromPipeline)] 
-    [string[]]
-    $Path,
+  param (
+    [parameter(Mandatory)]
+    [string]
+    $Days,
 
     [parameter()] 
     [string[]]
     $Filter,
-        
-    [parameter(Mandatory)]
-    [string]
-    $Days,
+
+    [parameter()]  
+    [switch]
+    $Log = $false,
+
+    [parameter(ValueFromPipeline)] 
+    [string[]]
+    $Path,
         
     [parameter()] 
     [string]
@@ -67,16 +71,12 @@ function Get-FilesOlderThan
     [parameter()] 
     [ValidateSet('KB', 'MB', 'GB')] 
     [string]
-    $Unit = 'KB',
-
-    [parameter()]  
-    [switch]
-    $Log = $false
+    $Unit = 'KB'
   )
 
   begin
   {
-    if (-not(Test-Path $path))
+    if (-not(Test-Path -Path $path))
     { 
       throw "Cannot find the path $path because it does not exist"
     }
