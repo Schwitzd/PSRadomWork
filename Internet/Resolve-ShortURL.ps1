@@ -7,30 +7,32 @@
 		Function to resolve a short URL to the absolute URI.
 		
 	.PARAMETER ShortUrl
-		Specifies the ShortURL
+		Specifies the short URL link.
 
 	.EXAMPLE
-		Resolve-ShortURL -ShortUrl http://goo.gl/P5PKq
+		PS C:\> Resolve-ShortURL -ShortUrl http://goo.gl/P5PKq
+		This command gets the absolute URI for the given URL.
 
 	.NOTES 
 		Author:		Daniel Schwitzgebel
 		Created:	07/08/2016
-		Modified:	08/08/2016
-		Version:	1.0
+		Modified:	11/04/2020
+		Version:	1.0.1
 	#>
 	
 	[CmdletBinding()]
 	[OutputType([System.String])]
-	param(
-		[String[]]$ShortUrl
+	param (
+		[String[]]
+		$ShortUrl
 	)
 	
-	Foreach ($URL in $ShortUrl){
-		Try
+	foreach ($url in $ShortUrl){
+		try
 		{
-			(Invoke-WebRequest -Uri $URL -MaximumRedirection 0 -ErrorAction Ignore).Headers.Location
+			(Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction Stop).Headers.Location
 		}
-		Catch
+		catch
 		{
 			throw 'URL not resolved'
 		}

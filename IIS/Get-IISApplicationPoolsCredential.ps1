@@ -8,15 +8,16 @@
         Get credentials used in a Specific ApplicationPool in IIS by connecting to the remote host.
     
     .PARAMETER ComputerName
-        IIS Server name.
+        Specifies the IIS Server name.
     
     .EXAMPLE 
-        Get-IISApplicationPoolsCredential -ComputerName foo
+        PS C:\> Get-IISApplicationPoolsCredential -ComputerName foo
+        This command gets the passwords for all Application Polls on webserver 'foo'.
     
     .NOTES 
         Author:    Daniel Schwitzgebel
         Created:   28/11/2018
-        Modified:  28/11/2018
+        Modified:  11/04/2020
         Version:   1.0
     #>
 

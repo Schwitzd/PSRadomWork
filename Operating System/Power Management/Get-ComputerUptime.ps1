@@ -6,22 +6,22 @@ function Get-ComputerUptime
   
   .DESCRIPTION 
     This function will get the computer uptime by querying wmi.
-    Admin right are required to run this script!
   
   .PARAMETER ComputerName 
-    ComputerName to check the uptime
+    Specifies the computer name to check the uptime.
     
   .EXAMPLE 
-    Get-ComputerUptime -ComputerName foo
+    PS C:\> Get-ComputerUptime -ComputerName foo
+    This command gets the computer uptime.
   
   .NOTES
     Author:    Daniel Schwitzgebel
     Created:   27/04/2012
-    Modified:  10/12/2019
-    Version:   1.5
+    Modified:  11/04/2020
+    Version:   1.5.1
   #>
 
-  [OutputType([string])] 
+  [OutputType([String])] 
   param ( 
     [Parameter(Mandatory)] 
     [ValidateNotNullOrEmpty()]
@@ -31,7 +31,7 @@ function Get-ComputerUptime
 
   if (Test-NetConnection $ComputerName -InformationLevel Quiet)
   {
-    $hostUptime = (Get-CimInstance -Class Win32_OperatingSystem -computername $ComputerName).LastBootUpTime
+    $hostUptime = (Get-CimInstance -Class Win32_OperatingSystem -Computername $ComputerName).LastBootUpTime
     $uptime = (Get-Date) - $hostUptime
     $hostUptime = '{0:dd/MM/yyyy hh:mm:ss}' -f $hostUptime
 

@@ -2,28 +2,29 @@ function Get-ShutdownReasons
 {
   <#
   .SYNOPSIS 
-    Export all shutdown reasons within asked reason.
+    This function will export all shutdown reasons within asked reason.
   
   .DESCRIPTION 
-    This Script will export all the shutdown reasons within the asked period in HTML Report.
+    This function will export all the shutdown reasons within the asked period in HTML Report.
   
   .PARAMETER ComputerName
-    A single Computer name. 
+    Specifies the computer name. 
   
   .PARAMETER DayBack
-    Dayback for lookup.
+    Specifies the Dayback for lookup.
 
   .PARAMETER Destination
-    Path to save HTML Report.
+    Specifies the path to save HTML Report.
     
   .EXAMPLE 
     PS C:\> Get-ShutdownReasons -ComputerName foo -DayBack 30 -Destination 'c:\temp'
+    This command gets the shutdown reasons of the last 30 days on the file 'c:\temp'.
   
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   02/01/2017
-    Modified:  10/12/2019
-    Version:   1.3
+    Modified:  11/04/2020
+    Version:   1.3.1
   #>
 
   param ( 
@@ -52,7 +53,7 @@ function Get-ShutdownReasons
 
   $htmlReport = "$Destination\$ComputerName" + '_ShutdownReasons.html'
 
-  if (Test-Path $htmlReport)
+  if (Test-Path -Path $htmlReport)
   {
     Remove-Item $htmlReport
   }
@@ -62,7 +63,7 @@ function Get-ShutdownReasons
     LogName      = 'System'
     EntryType    = 'Information'
     Source       = 'USER32'
-    After        = (Get-Date).AddDays( - ($DayBack))
+    After        = (Get-Date).AddDays(-($DayBack))
   }
 
   $convertToHtmlParams = @{
