@@ -2,22 +2,23 @@ Function Get-SCCMClientStatus
 {
   <#
   .SYNOPSIS
-    Return the state of the SCCM Client Softwares.
+    This function will get the state of the SCCM Client Softwares.
   
   .DESCRIPTION
-    Return the state of the SCCM Client Softwares querying the remote Computer.
+    This function will get the state of the SCCM Client Softwares querying the remote Computer.
   
   .PARAMETER ComputerName
-    A single Computer.
+    Specifies the computer name.
   
   .EXAMPLE
     PS C:\> Get-SCCMClientStatus -ComputerName foo
+    This command gets the SCCM Client status for the given computer name.
   
   .NOTES
     Author:    Daniel Schwitzgebel 
     Created:   08/06/2018
-    Modified:  30/12/2019
-    Version:   1.2.1
+    Modified:  11/04/2020
+    Version:   1.3
   #>
 
   [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
@@ -32,12 +33,18 @@ Function Get-SCCMClientStatus
 
   process
   {
-    $sccmSoftwares = Get-CimInstance -ComputerName $ComputerName -ClassName CCM_Application -Namespace 'root\ccm\clientSDK' | 
+    $getCimInstanceParam = @{
+      ComputerName = $ComputerName
+      ClassName    = 'CCM_Application'
+      Namespace    = 'root\ccm\clientSDK'
+    }
+
+    $sccmSoftwares = Get-CimInstance @getCimInstanceParam |
       Select-Object Name, InstallState | Sort-Object InstallState 
   }
 
   end
   {
-    return $sccmSoftwares 
+    $sccmSoftwares 
   }
 }
