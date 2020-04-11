@@ -24,7 +24,7 @@ function Get-ShutdownReasons
     Author:    Daniel Schwitzgebel
     Created:   02/01/2017
     Modified:  11/04/2020
-    Version:   1.3.1
+    Version:   1.3.2
   #>
 
   param ( 
@@ -55,7 +55,7 @@ function Get-ShutdownReasons
 
   if (Test-Path -Path $htmlReport)
   {
-    Remove-Item $htmlReport
+    Remove-Item -Path $htmlReport
   }
 
   $getEventLogParams = @{
