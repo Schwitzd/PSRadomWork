@@ -9,6 +9,9 @@ function Get-ADMemberOf
     
     .PARAMETER ComputerName
         Specifies a computer name.
+
+    .PARAMETER Filter
+        Specifies a custom filter.
     
     .PARAMETER Username
         Specifies an username.
@@ -30,16 +33,16 @@ function Get-ADMemberOf
         [ValidateNotNullOrEmpty()]
         [String]
         $Username,
-      
-        [Parameter(ParameterSetName = 'ComputerName')]
-        [ValidateNotNullOrEmpty()]
-        [String]
-        $ComputerName,
         
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [String]
-        $Filter
+        $Filter,
+      
+        [Parameter(ParameterSetName = 'ComputerName')]
+        [ValidateNotNullOrEmpty()]
+        [String]
+        $ComputerName
     )
 
     begin

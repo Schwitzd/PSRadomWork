@@ -115,7 +115,6 @@ function Export-ADNestedGroupMembers
         Function export members of a given AD group recursively along with nesting level and parent group information. 
         It also displays if each user account is disabled. 
 
-
     .PARAMETER ExportFile
         Specifies the file name where the group members will be exported.
 
@@ -137,12 +136,11 @@ function Export-ADNestedGroupMembers
     param (
         [Parameter(Mandatory)]
         [String]
-        $SearchGroup,
+        $ExportFile,
 
         [Parameter(Mandatory)]
         [String]
-        $ExportFile
-
+        $SearchGroup
     )
 
     $groupMember = Get-ADGroupMember $SearchGroup | Sort-Object objectClass -descending

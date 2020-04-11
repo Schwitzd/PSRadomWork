@@ -23,7 +23,7 @@ Function Convert-SIDToUsername
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADUser])]
-  param( 
+  param ( 
     [Parameter(Mandatory)] 
     [String]
     $SID

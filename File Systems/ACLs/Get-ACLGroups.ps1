@@ -26,14 +26,14 @@ Function Get-aclGroups
   
   [OutputType([System.Security.Principal.NTAccount])]
   [CmdletBinding()]
-  param ( 
-    [Parameter(Mandatory)] 
-    [String]
-    $Path,
-
+  param (
     [Parameter()]
     [int]
-    $Depth = 2
+    $Depth = 2,
+     
+    [Parameter(Mandatory)] 
+    [String]
+    $Path
   )
 
   begin

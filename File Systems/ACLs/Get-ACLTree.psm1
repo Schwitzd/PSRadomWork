@@ -7,22 +7,22 @@
 
     [CmdletBinding()]
     param(
-        [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $Path = '.',
-
-        [Parameter()]
-        [int]
-        $MaxDepth = 0,
-
         [Parameter()]
         [int]
         $Depth = 0,
 
         [Parameter()]
         [string]
-        $DepthPrefix = ''
+        $DepthPrefix = '',
+
+        [Parameter()]
+        [int]
+        $MaxDepth = 0,
+        
+        [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Path = '.'
     )
 
     process

@@ -2,26 +2,23 @@ function Get-ComputerOwner
 {
   <#
   .SYNOPSIS 
-    Get User ID from Name or Surname.
+    This function will get the computer owner.
   
   .DESCRIPTION 
-    Search in Active Directory and get User ID from Name or Surname.
+    This function will get the computer owner based on the attribute Description in Active Directory.
 
-  .PARAMETER Name
-    Specifies the person's name.
-
-  .PARAMETER Surname
-    Specifies the person's surname. 
+  .PARAMETER OwnerName
+    Specifies the owner name.
     
   .EXAMPLE 
-    PS C:\> Get-UserID -Surname foo
-    This command gets the person's surname
+    PS C:\> Get-ComputerOwner -OwnerName foo
+    This command gets the computer's owner name.
   
   .NOTES 
     Author:    Daniel Schwitzgebel
     Created:   23/05/2018
     Modified:  09/04/2020
-    Version:   1.3.2
+    Version:   1.3.3
   #> 
 
   [OutputType([Microsoft.ActiveDirectory.Management.ADComputer])]

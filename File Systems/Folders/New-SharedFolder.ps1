@@ -7,50 +7,54 @@ function New-SharedFolder
     .DESCRIPTION 
         Create a new SMB Share with share permission and grant access to Authenticated Users.
             
-    .PARAMETER Path
-        A description of the Path parameter.
-        
-    .PARAMETER FolderName
-        Name of the folder to share. 
-    
-    .PARAMETER ShareName
-        Name of the the share.
-        
     .PARAMETER EnumerateFolder
-        Enable Access Base Enumeration 
+        Enable Access Base Enumeration.
+
+    .PARAMETER FolderName
+        Specifies the name of the folder to share. 
+
+    .PARAMETER Path
+        Specifies the path of the share.
+            
+    .PARAMETER ShareName
+        Specifies the name of the the share. 
     
     .EXAMPLE 
         PS C:\> New-ShareFolder -Path 'c:\temp' -FolderName 'test' -ShareName 'test$'
-    
+        This command creates a new share named 'test'.
+
+    .EXAMPLE 
+        PS C:\> New-ShareFolder -Path 'c:\foo' -FolderName 'foo' -ShareName 'foo$' -EnumerateFolder
+        This command creates a new share named 'foo' with Access Base Enumaration enabled.
+
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    02/04/2020
-        Modified:   02/04/2020
-        Version:    1.0
-
+        Modified:   11/04/2020
+        Version:    1.0.1
   #> 
 
     [OutputType([Void])]
     [CmdletBinding()]
-    param ( 
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [String]
-        $Path,
+    param (
+        [Parameter()]
+        [Switch]
+        $EnumerateFolder,
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]
         $FolderName,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [String]
+        $Path,
       
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]
-        $ShareName,
-
-        [Parameter()]
-        [Switch]
-        $EnumerateFolder
+        $ShareName
     )
 
     process

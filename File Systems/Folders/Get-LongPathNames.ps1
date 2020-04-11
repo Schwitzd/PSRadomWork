@@ -5,17 +5,17 @@ function Get-LongPathNames
     This function will get the list of file and folder with long path.
   
   .DESCRIPTION 
-    This function will parse the output of robocopy to get the list of file and folder with long path.
-    Admin right are required to run this script!
+    This function will parse the output of Robocopy to get the list of file and folder with long path.
   
   .PARAMETER FolderPath 
-    Path to parse
+    Specifies the path to parse.
 
   .PARAMETER MaxDepth 
-    Maximum character length to discover (default: 248)
+    Specifies the maximum character length to discover, default is 248.
     
   .EXAMPLE 
-    Get-LongPathNames -FolderPath M:\Data -MaxDepth 255
+    PS C:\> Get-LongPathNames -FolderPath M:\Data -MaxDepth 255
+    This command gets the paths longer then 255 charapters.
   
   .NOTES 
     Author:     Daniel Schwitzgebel
@@ -27,8 +27,9 @@ function Get-LongPathNames
     http://www.powershellmagazine.com/2012/07/24/jaap-brassers-favorite-powershell-tips-and-tricks/
     https://learn-powershell.net/2013/04/01/list-all-files-regardless-of-260-character-path-restriction-using-powershell-and-robocopy/  
   #>
-  param(
-    [CmdletBinding()]
+
+  [CmdletBinding()]
+  param (
     [Parameter(Mandatory)]
     [string[]]
     $FolderPath,
@@ -47,7 +48,7 @@ function Get-LongPathNames
     $results = @()
   }
 
-  Process
+  process
   {
     foreach ($path in $FolderPath)
     {
@@ -71,7 +72,8 @@ function Get-LongPathNames
       }
     }
   }
-  End
+  
+  end
   {
     $results | Format-Table * -AutoSize | Out-String -Width 500 | Out-File 'c:\temp\LongPathNames.log'
     Write-Output 'Log in c:\temp\LongPathNames.log'
