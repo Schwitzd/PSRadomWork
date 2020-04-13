@@ -1,5 +1,9 @@
 # Operating System
 
+## Disk
+
+* **Get-ExpandableDisk** - This function will get all the expandable disks
+
 ## Infos
 
 * **Get-ComputerInfo** - This function will get hardware and OS infos
