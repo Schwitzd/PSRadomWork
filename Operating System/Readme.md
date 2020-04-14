@@ -3,6 +3,7 @@
 ## Disk
 
 * **Get-ExpandableDisk** - This function will get all the expandable disks
+* **Resize-PartitionMaxSize** - This function will extend the partition to the maximum size.
 
 ## Infos
 
