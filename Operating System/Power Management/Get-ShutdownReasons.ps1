@@ -40,7 +40,7 @@ function Get-ShutdownReasons
       
     [Parameter(Mandatory)]
     [ValidateScript({ 
-        if (-not (Test-Path $_))
+        if (-not (Test-Path -Path $_))
         {
           throw 'Destination folder not found!'
         }
