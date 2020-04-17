@@ -25,7 +25,7 @@ function Resize-PartitionMaxSize
   #> 
 
     [OutputType([Void])]
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -38,12 +38,12 @@ function Resize-PartitionMaxSize
         $DriveLetter
     )
 
-       
     begin
     {
         try 
         {
             $session = New-CimSession -ComputerName $ComputerName -ErrorAction Stop
+            Write-Verbose -Message "Opening CIM session to $ComputerName"
         }
         catch 
         {
@@ -55,7 +55,7 @@ function Resize-PartitionMaxSize
     {
         try
         {
-            if ($PSCmdlet.ShouldProcess("$DriveLetter Partition", "Resize to maximum available"))
+            if ($PSCmdlet.ShouldProcess("$DriveLetter Partition", 'Resize to maximum available'))
             {
                 $getPartitionSupportedSizeParam = @{
                     CimSession  = $session
@@ -70,6 +70,7 @@ function Resize-PartitionMaxSize
                     Size        = $sizeMax
                 }
                 Resize-Partition @resizePartitionParam
+                Write-Verbose -Message "Resizing Partition $DriveLetter to $sizeMax."
             }
         }
         catch
@@ -80,6 +81,7 @@ function Resize-PartitionMaxSize
         
     end
     {
-        Remove-CimSession -CimSession $session       
+        Remove-CimSession -CimSession $session
+        Write-Verbose -Message "Closing CIM session to $ComputerName"     
     }
 }
