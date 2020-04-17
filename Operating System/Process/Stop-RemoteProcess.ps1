@@ -12,16 +12,17 @@ function Stop-RemoteProcess
     
     .EXAMPLE 
         PS C:\> Stop-RemoteProcess -ComputerName foo
+        This command stops processes on 'foo' computer.
     
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    29/05/2018
-        Modified:   11/12/2019
-        Version:    1.1
+        Modified:   17/04/2020
+        Version:    1.2
     #>
     
     [OutputType([void])]
-    [CmdletBinding(SupportsShouldProcess)]        
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]        
     param (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -43,6 +44,8 @@ function Stop-RemoteProcess
                     'ID', 
                     'Path'
                 ) | Sort-Object 'ProcessName' | Out-GridView -PassThru -Title 'Select processes'
+            
+            Write-Verbose -Message 'Getting running processes.'
         }
         catch
         {
@@ -64,13 +67,15 @@ function Stop-RemoteProcess
                             Stop-Process -Id $using:process.Id -Force -ErrorAction SilentlyContinue
                         }
                     }
+
+                    Write-Verbose -Message "Stopping $process.ProcessName process."
                 }
                 catch { }
             }
         }  
         else
         {
-            Write-Verbose 'No processes have been selected'
+            Write-Verbose -Message 'No processes have been selected.'
         }    
     }
 }
