@@ -23,7 +23,7 @@ function Remove-ProfileItem
     #>
     
     [OutputType([void])]
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -36,21 +36,25 @@ function Remove-ProfileItem
 			
     foreach ($p in $Path)
     {
-        if (Test-Path -Path "$allUserProfileFolderPath\$p")
+        $pathToRemove = "$allUserProfileFolderPath\$p"
+        if (Test-Path -Path $pathToRemove)
         {
-            if ($PSCmdlet.ShouldProcess("$allUserProfileFolderPath\$p", 'Remove Item'))
+            if ($PSCmdlet.ShouldProcess($pathToRemove, 'Remove Item'))
             {
-                Remove-Item -Path "$allUserProfileFolderPath\$p" -Force -Recurse
+                Remove-Item -Path $pathToRemove -Force -Recurse
+                Write-Verbose -Message "Removing $pathToRemove"
             }
         }
 			
         foreach ($ProfilePath in $userProfileFolderPaths)
         {
-            if (Test-Path "$ProfilePath\$p")
+            $pathToRemove = "$ProfilePath\$p"
+            if (Test-Path -Path $pathToRemove)
             {
-                if ($PSCmdlet.ShouldProcess("$ProfilePath\$p", 'Remove Item'))
+                if ($PSCmdlet.ShouldProcess($pathToRemove, 'Remove Item'))
                 {
-                    Remove-Item -Path "$ProfilePath\$p" -Force -Recurse
+                    Remove-Item -Path $pathToRemove -Force -Recurse
+                    Write-Verbose -Message "Removing $pathToRemove"
                 }
             }
         }       
