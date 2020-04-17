@@ -44,8 +44,8 @@ function Invoke-BitsTransferAsynchronous
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    09/04/2020
-        Modified:   09/04/2020
-        Version:    1.0
+        Modified:   17/04/2020
+        Version:    1.1
     #>
 
     [OutputType([Void])]
@@ -80,6 +80,8 @@ function Invoke-BitsTransferAsynchronous
             $TransferType = 'Upload'
         }
 
+        Write-Verbose -Message "Transfer Type is $TransferType."
+
         if ($Proxy)
         {
             $invokeBitsTransferAsynchronousParam = @{
@@ -106,10 +108,12 @@ function Invoke-BitsTransferAsynchronous
         try 
         {
             $bitsJob = Start-BitsTransfer @invokeBitsTransferAsynchronousParam
+            Write-Verbose -Message "Sending $Source to $Destination"
 
             do 
             {
                 Start-Sleep -Seconds 2
+                Write-Verbose -Message 'Waiting until transfer is completed.'
                 if ($bitsJob.JobState -eq 'TransientError')
                 {
                     throw 'Failed to perform the operation, Job State is TransientError.'
@@ -117,6 +121,7 @@ function Invoke-BitsTransferAsynchronous
             } until ($bitsJob.JobState -eq 'Transferred')
 
             $bitsJob | Complete-BitsTransfer
+            Write-Verbose -Message "$source successfully transferred."
         }
         catch 
         {
