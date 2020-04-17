@@ -31,7 +31,7 @@ function New-SharedFolder
         Author:     Daniel Schwitzgebel
         Created:    02/04/2020
         Modified:   11/04/2020
-        Version:    1.0.1
+        Version:    1.0.2
   #> 
 
     [OutputType([Void])]
@@ -59,9 +59,10 @@ function New-SharedFolder
 
     process
     {
-        if (-not (Test-Path "$Path\$FolderName"))
+        if (-not (Test-Path -Path "$Path\$FolderName"))
         {
             $null = New-Item -ItemType Directory -Path $Path -Name $FolderName
+            Write-Verbose -Message "Creating folder $Path\$FolderName"
         }
 
         try
@@ -85,6 +86,7 @@ function New-SharedFolder
             }
 
             $null = New-SmbShare @newSmbShareParam
+            Write-Verbose -Message "Creating the share."
         
         }
         catch 
@@ -95,6 +97,7 @@ function New-SharedFolder
         try
         {
             Revoke-SmbShareAccess -Name $ShareName -AccountName 'Everyone' -Force
+            Write-Verbose -Message "Removing Everyone Account from the share."
         }
         catch
         {
