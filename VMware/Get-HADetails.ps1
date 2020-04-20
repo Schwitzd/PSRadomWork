@@ -20,7 +20,7 @@ function Get-HADetails
         Modified:   20/04/2020
         Version:    1.0
 
-    .LINKS
+    .LINK
         https://code.vmware.com/forums/2530/vsphere-powercli#579473
     #>
 
