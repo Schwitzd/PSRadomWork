@@ -48,7 +48,7 @@ Function Get-VMApplicationInfo
             throw $_.Exception.Message
         }
 
-                $vmToolsVersion = (Get-VM -Name $VM).Guest.ToolsVersion
+        $vmToolsVersion = (Get-VM -Name $VM).Guest.ToolsVersion
         if (-not ([version]$vmToolsVersion -gt [version]'11.0.0'))
         {
             throw 'AppInfo is available from VMware Tools 11.0.0, upgrade the tools on the VM'
@@ -63,7 +63,7 @@ Function Get-VMApplicationInfo
         {
             $appInfo.applications | Sort-Object -Property a | 
                 Select-Object @{Name = 'Application'; Expression = { $_.a } }, 
-                    @{Name = 'Version'; Expression = { $_.v } }
+                @{Name = 'Version'; Expression = { $_.v } }
         }
         else
         {
