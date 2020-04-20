@@ -2,19 +2,20 @@ Function Get-VMApplicationInfo
 {
     <#
     .SYNOPSIS 
-        Get the list of running process on a VM
+        This function will get the list of running process on a VM
     
     .DESCRIPTION 
-        Get the list of running process on a VM using the AppInfo Plugin available on VMware Tools 11
+        This function will get the list of running process on a VM using the AppInfo Plugin available on VMware Tools 11
     
     .PARAMETER vCenter
-        The address of the vCenter server. This can either be the server name or the FQDN.
+        Specifies the address of the vCenter server.
     
     .PARAMETER VM
-        The name of the virtual machine.
+        Specifies the name of the virtual machine.
     
     .EXAMPLE 
-        Get-VMApplicationInfo -vCenter vcenter01 -VM foo
+        PS C:\> Get-VMApplicationInfo -vCenter vcenter01 -VM foo
+        This command gets the processes running on 'foo' VM.
     
     .NOTES 
         Author:     Daniel Schwitzgebel
@@ -23,6 +24,7 @@ Function Get-VMApplicationInfo
         Version:    1.0
     #>
 
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -45,16 +47,16 @@ Function Get-VMApplicationInfo
         {
             throw $_.Exception.Message
         }
-    }
 
-    process
-    {
-        $vmToolsVersion = (Get-VM -Name $VM).Guest.ToolsVersion
+                $vmToolsVersion = (Get-VM -Name $VM).Guest.ToolsVersion
         if (-not ([version]$vmToolsVersion -gt [version]'11.0.0'))
         {
             throw 'AppInfo is available from VMware Tools 11.0.0, upgrade the tools on the VM'
         }
+    }
 
+    process
+    {
         $appInfo = (Get-AdvancedSetting -Entity $VM -Name 'guestinfo.appInfo').Value | ConvertFrom-Json
 
         if ($appInfo)
@@ -71,6 +73,13 @@ Function Get-VMApplicationInfo
 
     end
     {
-        $null = Disconnect-VIServer -Server $vCenter -Confirm:$false  
+        try
+        { 
+            $null = Disconnect-VIServer -Server $vCenter -Confirm:$false
+        }
+        catch
+        {
+            throw $_.Exception.Message
+        }  
     }
 }
