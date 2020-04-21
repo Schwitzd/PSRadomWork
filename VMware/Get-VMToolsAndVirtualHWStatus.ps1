@@ -35,7 +35,7 @@
     [String]
     $vCenter,
 
-    [Parameter()]
+    [Parameter(ValueFromPipeline)]
     [String[]]
     $VM
   )
