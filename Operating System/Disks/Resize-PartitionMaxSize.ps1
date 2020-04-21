@@ -89,7 +89,7 @@ function Resize-PartitionMaxSize
         }
         catch
         {
-            throw "failed to resize the $DriveLetter partition."
+            throw $_.Exception.Message
         }
     }
         
