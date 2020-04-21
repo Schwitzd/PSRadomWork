@@ -20,8 +20,8 @@ function Resize-PartitionMaxSize
     .NOTES 
         Author:     Daniel Schwitzgebel
         Created:    14/04/2020
-        Modified:   14/x04/2020
-        Version:    1.0
+        Modified:   21/04/2020
+        Version:    1.1
   #> 
 
     [OutputType([Void])]
@@ -55,8 +55,18 @@ function Resize-PartitionMaxSize
     {
         try
         {
-            if ($PSCmdlet.ShouldProcess("$DriveLetter Partition", 'Resize to maximum available'))
+            if ($PSCmdlet.ShouldProcess("Partition ${DriveLetter}:", 'Resize to maximum available size'))
             {
+
+                $getPartitionParam = @{
+                    CimSession  = $session
+                    DriveLetter = $DriveLetter
+                }
+
+                $partitionInfo = Get-Partition @getPartitionParam
+
+                Update-Disk -CimSession $session -Number $partitionInfo.DiskNumber
+                
                 $getPartitionSupportedSizeParam = @{
                     CimSession  = $session
                     DriveLetter = $DriveLetter
@@ -64,13 +74,17 @@ function Resize-PartitionMaxSize
 
                 $sizeMax = (Get-PartitionSupportedSize @getPartitionSupportedSizeParam).SizeMax
 
-                $resizePartitionParam = @{
-                    CimSession  = $session 
-                    DriveLetter = $DriveLetter
-                    Size        = $sizeMax
+                if (-not ($partitionInfo.Size -ge $sizeMax))
+                {
+
+                    $resizePartitionParam = @{
+                        CimSession  = $session 
+                        DriveLetter = $DriveLetter
+                        Size        = $sizeMax
+                    }
+                    Resize-Partition @resizePartitionParam
+                    Write-Verbose -Message "Resizing Partition $DriveLetter to $sizeMax."
                 }
-                Resize-Partition @resizePartitionParam
-                Write-Verbose -Message "Resizing Partition $DriveLetter to $sizeMax."
             }
         }
         catch
