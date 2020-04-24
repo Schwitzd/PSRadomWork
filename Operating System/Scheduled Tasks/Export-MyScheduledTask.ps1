@@ -19,10 +19,10 @@ function Export-MyScheduledTask
   
     .NOTES
         Author:    Daniel Schwitzgebel
-        Created:   27/04/2012
+        Created:   11/04/2020
         Modified:  11/04/2020
         Version:   1.0
-  #>
+    #>
 
     [OutputType([Void])]
     [CmdletBinding()]
