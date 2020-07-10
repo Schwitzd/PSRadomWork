@@ -2,13 +2,13 @@ function Get-ProtectedOfficeDocument
 {
     <# 
     .SYNOPSIS 
-        This function will gets the list of Microsoft Office documents protected with password.
+        This function will get the list of Microsoft Office documents protected with password.
     
     .DESCRIPTION 
         This function will gets the list of Microsoft Office documents protected with password.
         It is possible to choose a specific files or a bunch of folders.
-        The detection is done by reading the firsts byte of the file.
-        Supported Office program: Word, Excel, PowerPoint, Visio, Access, Publisher
+        The detection is done by reading the first 2 Bytes of the file.
+        Supported Office programs: Word, Excel, PowerPoint, Visio, Access, Publisher
     
     .PARAMETER File
         Specifies a single or an array of file. 
