@@ -1,4 +1,4 @@
-function Get-OfficeProtectedDocument
+function Get-ProtectedOfficeDocument
 {
     <# 
     .SYNOPSIS 
@@ -17,10 +17,10 @@ function Get-OfficeProtectedDocument
         Specifies a single or an array of folders. 
 
     .EXAMPLE 
-        PS C:\> Get-OfficeProtectedDocument -File mydocument.docx
+        PS C:\> Get-ProtectedOfficeDocument -File mydocument.docx
         This command return if the file mydocument.docx is protected by password.
 
-        PS C:\> Get-OfficeProtectedDocument -Folder c:\temp,c:\documents
+        PS C:\> Get-ProtectedOfficeDocument -Folder c:\temp,c:\documents
         This command scan the above folders for Office documents protected by password.
     
     .NOTES 

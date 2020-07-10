@@ -12,6 +12,7 @@ On every folder a brief description of the scripts.
 * [IIS](IIS)
 * [Internet](Internet)
 * [Networking](Networking)
+* [Office](Office)
 * [Operating System](Operating%20System)
 * [Printers](Printers)
 * [SCCM](SCCM)
