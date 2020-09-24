@@ -24,7 +24,7 @@ function Get-ADMemberOf
         Author:    Daniel Schwitzgebel
         Created:   31/08/2018
         Modified:  24/09/2020
-        Version:   1.3.4
+        Version:   1.3.5
     #> 
 
     [CmdletBinding(DefaultParameterSetName = 'Username')]
@@ -45,47 +45,30 @@ function Get-ADMemberOf
         $ComputerName
     )
 
-    begin
+    switch ($psCmdlet.ParameterSetName)
     {
-        $memberOf = @()
-    }
-
-    process
-    {
-        switch ($psCmdlet.ParameterSetName)
+        'Username'
         {
-            'Username'
-            {
-                (Get-ADUser -Identity $Username -Properties memberOf).MemberOf | 
-                    Where-Object { $_ -like "*$Filter*" } | 
-                        ForEach-Object {
-                            $group = [ordered]@{
-                                'GroupName' = ($_ -split ',*..=')[1]
-                                'GroupOU'   = $_.Substring($_.IndexOf('OU='))
-                            }
- 
-                            $memberOf += New-Object -TypeName PSCustomObject -Property $Group
+            (Get-ADUser -Identity $Username -Properties memberOf).MemberOf | 
+                Where-Object { $_ -like "*$Filter*" } | 
+                    ForEach-Object {
+                        [PSCustomObject]@{
+                            GroupName = ($_ -split ',*..=')[1]
+                            GroupOU   = $_.Substring($_.IndexOf('OU='))
                         }
-            }
-
-            'ComputerName'
-            {
-                (Get-ADComputer -Identity $ComputerName -Properties memberOf).MemberOf | 
-                    Where-Object { $_ -like "*$Filter*" } | 
-                        ForEach-Object {
-                            $group = [ordered]@{
-                                'GroupName' = ($_ -split ',*..=')[1]
-                                'GroupOU'   = $_.Substring($_.IndexOf('OU='))
-                            }
- 
-                            $memberOf += New-Object -TypeName PSCustomObject -Property $Group
-                        }
-            }
+                    }
         }
-    }
-    
-    end
-    {
-        $memberOf | Sort-Object 'GroupName' | Format-Table
+
+        'ComputerName'
+        {
+            (Get-ADComputer -Identity $ComputerName -Properties memberOf).MemberOf | 
+                Where-Object { $_ -like "*$Filter*" } | 
+                    ForEach-Object {
+                        [PSCustomObject]@{
+                            GroupName = ($_ -split ',*..=')[1]
+                            GroupOU   = $_.Substring($_.IndexOf('OU='))
+                        }
+                    }
+        }
     }
 }
