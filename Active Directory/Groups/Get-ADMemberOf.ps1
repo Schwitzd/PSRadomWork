@@ -86,6 +86,6 @@ function Get-ADMemberOf
     
     end
     {
-        $memberOf | Sort-Object 'Group Name' | Format-Table
+        $memberOf | Sort-Object 'GroupName' | Format-Table
     }
 }
