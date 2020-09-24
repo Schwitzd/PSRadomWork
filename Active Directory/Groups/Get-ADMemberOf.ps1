@@ -23,8 +23,8 @@ function Get-ADMemberOf
     .NOTES 
         Author:    Daniel Schwitzgebel
         Created:   31/08/2018
-        Modified:  09/04/2020
-        Version:   1.3.3
+        Modified:  24/09/2020
+        Version:   1.3.4
     #> 
 
     [CmdletBinding(DefaultParameterSetName = 'Username')]
@@ -60,8 +60,8 @@ function Get-ADMemberOf
                     Where-Object { $_ -like "*$Filter*" } | 
                         ForEach-Object {
                             $group = [ordered]@{
-                                'Group Name' = ($_ -split ',*..=')[1]
-                                'Group OU'   = $_.Substring($_.IndexOf('OU='))
+                                'GroupName' = ($_ -split ',*..=')[1]
+                                'GroupOU'   = $_.Substring($_.IndexOf('OU='))
                             }
  
                             $memberOf += New-Object -TypeName PSCustomObject -Property $Group
@@ -74,8 +74,8 @@ function Get-ADMemberOf
                     Where-Object { $_ -like "*$Filter*" } | 
                         ForEach-Object {
                             $group = [ordered]@{
-                                'Group Name' = ($_ -split ',*..=')[1]
-                                'Group OU'   = $_.Substring($_.IndexOf('OU='))
+                                'GroupName' = ($_ -split ',*..=')[1]
+                                'GroupOU'   = $_.Substring($_.IndexOf('OU='))
                             }
  
                             $memberOf += New-Object -TypeName PSCustomObject -Property $Group
