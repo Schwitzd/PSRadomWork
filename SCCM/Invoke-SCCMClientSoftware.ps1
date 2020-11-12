@@ -38,7 +38,7 @@ function Invoke-SCCMClientSoftware
     [String]
     $AppName,
 
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory, ValueFromPipeline)]
     [ValidateNotNullOrEmpty()]
     [String]
     $ComputerName,

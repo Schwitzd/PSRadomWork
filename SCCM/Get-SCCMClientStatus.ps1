@@ -17,8 +17,8 @@ function Get-SCCMClientStatus
   .NOTES
     Author:    Daniel Schwitzgebel 
     Created:   08/06/2018
-    Modified:  11/04/2020
-    Version:   1.3
+    Modified:  19/10/2020
+    Version:   1.4
   #>
 
   [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
@@ -39,12 +39,12 @@ function Get-SCCMClientStatus
       Namespace    = 'root\ccm\clientSDK'
     }
 
-    $sccmSoftwares = Get-CimInstance @getCimInstanceParam |
-      Select-Object Name, InstallState | Sort-Object InstallState 
-  }
-
-  end
-  {
-    $sccmSoftwares 
+    Get-CimInstance @getCimInstanceParam | ForEach-Object {
+      [PSCustomObject]@{
+        ComputerName = $ComputerName
+        Name         = $_.Name
+        InstallState = $_.InstallState
+      }
+    }
   }
 }
