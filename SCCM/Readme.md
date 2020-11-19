@@ -1,5 +1,6 @@
 # SCCM
 
+* **Get-SCCMClientCacheElements** - This function will get the elements inside the SCCM client cache.
 * **Get-SCCMClientCache** - This function will get information about SCCM Cache
 * **Get-SCCMClientStatus** - Return the state of the SCCM Client Softwares
 * **Invoke-SCCMClientActionsAll** - Triggers a ConfigMgr Client Cycle Action on a remote computer
