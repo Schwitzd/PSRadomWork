@@ -1,0 +1,20 @@
+{
+    "$schema": "https://raw.githubusercontent.com/PowerShell/Crescendo/master/Microsoft.PowerShell.Crescendo/src/Microsoft.PowerShell.Crescendo.Schema.json",
+    "Verb": "Get",
+    "Noun": "KerberosTicketDomainGroup",
+    "OriginalName": "whoami",
+    "OriginalCommandElements": [
+        "/groups",
+        "/fo",
+        "CSV"
+    ],
+    "OutputHandlers": [
+        {
+            "ParameterSetName": "Default",
+            "Handler":"param ( $whoamiOutput )
+                $whoamiOutput | ConvertFrom-CSV | Where-Object { $_.\"Group Name\" -like \"$env:USERDOMAIN\\*\" } |
+                    Select-Object 'Group Name', SID
+            "
+            }
+        ]
+    }
