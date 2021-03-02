@@ -20,3 +20,8 @@
 
 * **Get-LongPathNames** - This function will get the list of file and folder with long path
 * **Get-SharedFolder** - Create a new shared folder with share permission
+
+## Shares
+
+* **New-BulkShares** - Based on input JOSN file multiple share are created
+* 
