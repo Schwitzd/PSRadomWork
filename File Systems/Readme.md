@@ -24,4 +24,7 @@
 ## Shares
 
 * **New-BulkShares** - Based on input JOSN file multiple share are created
-* 
+
+## VSS
+
+* **Get-VSSWriters** - Get the list of VSS writers
