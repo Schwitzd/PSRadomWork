@@ -27,4 +27,6 @@
 
 ## VSS
 
-* **Get-VSSWriters** - Get the list of VSS writers
+* **Get-VssWriters** - Get the list of VSS writers
+* **Restart-VssWriters** - This function restart a list of specified VSS writers
+  

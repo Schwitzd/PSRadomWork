@@ -1,44 +1,70 @@
-function Get-VSSWriters
+function Get-VssWriters
 {
-  <# 
-  .SYNOPSIS 
-    This function get the list of VSS writers
+    <# 
+    .SYNOPSIS 
+        This function get the list of VSS writers.
   
-  .DESCRIPTION 
-    This function get a list of VSS writers or a filtered list with only the writers in stable state
+    .DESCRIPTION 
+        This function get a list of VSS writers or a filtered based on the VSS writers state.
   
-  .PARAMETER Failed 
-    Specifies to return only failed writers
+    .PARAMETER Status 
+        Specifies the status to filter for.
     
-  .EXAMPLE 
-    Get-VSSWriters -Failed
-    This command gets the VSS writers in a failed state
+    .EXAMPLE
+        Get-VSSWriters -Status 'Failed'
+        This command gets the VSS writers in a failed state.
+
+    .EXAMPLE
+        Get-VSSWriters
+        This command gets all the VSS writers.
   
-  .NOTES
-    Author:    Daniel Schwitzgebel
-    Created:   22/06/2021
-    Modified:  22/06/2021
-    Version:   1.0
-  #>
+    .NOTES
+        Author:    Daniel Schwitzgebel
+        Created:   22/06/2021
+        Modified:  22/06/2021
+        Version:   1.0
+    #>
     
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param (
         [Parameter()]
-        [switch]
-        $Failed    
+        [ValidateSet('Stable', 'Failed', 'Waiting for completion')]
+        [string]
+        $Status    
     )
 
-    $vssWriters = vssadmin.exe list writers
-
-    if ($PSBoundParameters.ContainsKey('Failed'))
+    begin
     {
-        $vssWriters = $vssWriters | Select-String -Context 1, 4 '^writer name:' 
-            | Where-Object {
-                $_.Context.PostContext[2].Trim() -ne "state: [1] stable" -or
-                $_.Context.PostContext[3].Trim() -ne "last error: no error"
-        }
+        Write-Verbose "Executing vssadmin utility"
+        $vssWritersList = VSSAdmin list writers
     }
 
-    return $vssWriters
+    process
+    {
+        Write-Verbose "Retrieving VSS Writers"
+        $vssWritersList | Select-String -Pattern 'Writer name:' -Context 0, 4 |
+            ForEach-Object {
+
+                $vssWritersObj = [pscustomobject]@{
+                    Name       = $_.Line -replace "^(.*?): " -replace "'"
+                    Id         = $_.Context.PostContext[0] -replace "^(.*?): "
+                    InstanceId = $_.Context.PostContext[1] -replace "^(.*?): "
+                    State      = $_.Context.PostContext[2] -replace "^(.*?): "
+                    LastError  = $_.Context.PostContext[3] -replace "^(.*?): "
+                } 
+
+                if ($PSBoundParameters.ContainsKey('Status'))
+                {
+                    Write-Verbose "Filtering out the results"
+                    $vssWritersObj | Where-Object { $_.State -like "*$Status" }
+                }
+                else
+                {
+                    $vssWritersObj
+                }
+            }
+    }
+
+    end { }
 }
