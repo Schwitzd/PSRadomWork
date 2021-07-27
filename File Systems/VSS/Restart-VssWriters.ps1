@@ -21,8 +21,8 @@ function Restart-VssWriter
     .NOTES
         Author:    Daniel Schwitzgebel
         Created:   22/06/2021
-        Modified:  22/06/2021
-        Version:   1.0
+        Modified:  27/07/2021
+        Version:   1.1
     #>
 
     [OutputType([void])]
@@ -68,6 +68,7 @@ function Restart-VssWriter
             'SPSearch VSS Writer' { $vssServiceName = 'SPSearch' }
             'SPSearch4 VSS Writer' { $vssServiceName = 'SPSearch4' }
             'SqlServerWriter' { $vssServiceName = 'SQLWriter' }
+            'FileSyncSvc' { $vssServiceName = 'Sync Share Service Writer' }
             'System Writer' { $vssServiceName = 'CryptSvc' }
             'TermServLicensing' { $vssServiceName = 'TermServLicensing' }
             'WDS VSS Writer' { $vssServiceName = 'WDSServer' }

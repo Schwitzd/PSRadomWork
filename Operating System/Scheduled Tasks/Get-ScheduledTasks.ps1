@@ -7,14 +7,13 @@ Modified:    18/10/2016
 Version:     1.1.0
 #>
 
-$servers = Get-ADComputer -Filter 'Name -like "*"'
-$tasksList = @()
+$servers = Get-ADComputer -Filter 'Name -like "HSFIS*"'
+$tasksList = [System.Collections.ArrayList]@()
 
 foreach ($server in $servers.Name)
 {
-    if (Test-Connection -ComputerName $server -Quiet)
-    {
-
+    try
+    {   
         $scheduledService = New-Object -ComObject Schedule.Service                        
         $scheduledService.Connect($server)                        
         $rootfolder = $scheduledService.GetFolder('\')            
@@ -25,17 +24,21 @@ foreach ($server in $servers.Name)
         {
             if (-not ($task.Name -like "*Optimize Start Menu Cache*" -or $task.Name -like "*ShadowCopyVolume*" -or $task.Name -like "*User_Feed_Synchronization*"))
             {
-                $taskObj = [PSCustomObject]@{
+                $null = $tasksList.Add(
+                    [PSCustomObject]@{
                     ComputerName = $server
                     TaskName     = $Task.Name
                     IsEnabled    = $task.enabled 
                     LastRunTime  = $task.LastRunTime
                     NextRunTime  = $task.NextRunTime
-                }
-		  
-                $tasksList += $taskObj
+                    }
+		        )
             }
         }
+    }
+    catch 
+    {
+        Write-Warning -Message "Cannot connect to $server"
     }
 }
 
