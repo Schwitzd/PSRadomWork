@@ -68,7 +68,7 @@ function Restart-VssWriter
             'SPSearch VSS Writer' { $vssServiceName = 'SPSearch' }
             'SPSearch4 VSS Writer' { $vssServiceName = 'SPSearch4' }
             'SqlServerWriter' { $vssServiceName = 'SQLWriter' }
-            'FileSyncSvc' { $vssServiceName = 'Sync Share Service Writer' }
+            'Sync Share Service Writer' { $vssServiceName = 'FileSyncSvc' }
             'System Writer' { $vssServiceName = 'CryptSvc' }
             'TermServLicensing' { $vssServiceName = 'TermServLicensing' }
             'WDS VSS Writer' { $vssServiceName = 'WDSServer' }
