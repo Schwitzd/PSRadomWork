@@ -2,7 +2,7 @@ function Backup-SqlDatabases
 {
     <#
   .SYNOPSIS 
-    Backup all SQL Server databases on an instance, excluding built-in databases.This function close an open file.
+    Backup all SQL Server databases on an instance, excluding built-in databases.
 
   .DESCRIPTION
     This function uses the SQL Server module to perform a full backup of all SQL Server databases on a specified instance,

@@ -63,7 +63,7 @@ function Restore-SqlDatabases
         $restoreSqlDatabaseParam = @{
           ServerInstance   = $ServerInstance
           Database         = $databaseName
-          BackupFile       = $backupFiles
+          BackupFile       = $backupFilePath
           AutoRelocateFile = $true
         }
 

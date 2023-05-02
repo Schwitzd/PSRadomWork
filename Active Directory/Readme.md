@@ -2,11 +2,12 @@
 
 ## Bitlocker
 
-* **Get-BitlockerPassword** - This function will get the Bitlocker Password for a specific computer
+* **Get-BitlockerPassword** - This function will get the Bitlocker Password for a specified computer
 
 ## Computers
 
 * **Get-ComputerOwner** - Search in Active Directory and get User ID from Name or Surname
+* **Get-ComputerSpn** - This function retrieves the SPNs registered in Active Directory for a specified computer name
 
 ## Groups
 

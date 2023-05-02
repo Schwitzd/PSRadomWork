@@ -5,6 +5,7 @@ On every folder a brief description of the scripts.
 
 ## Contents
 
+* [.Net](.Net)
 * [Active Directory](Active%20Directory)
 * [DNS](DNS)
 * [File Systems](File%20Systems)
@@ -16,7 +17,8 @@ On every folder a brief description of the scripts.
 * [Operating System](Operating%20System)
 * [Printers](Printers)
 * [SCCM](SCCM)
+* [SQL](SQL)
 * [VMware](VMware)
-* [.Net](.Net)
+* [X509](X509)
 
 Cheers 🍻
