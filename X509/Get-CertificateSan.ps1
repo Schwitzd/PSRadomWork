@@ -1,24 +1,24 @@
-function Get-ExpiringCertificates
+function Get-CertificateSan
 {
     <#
     .SYNOPSIS
-        Retrieves certificates from the LocalMachine\My store on a remote or local computer that will expire within a specified number of days.
+        Retrieves the Subject Alternative Name (SAN) of a certificate based on its serial number.
 
     .DESCRIPTION
-        This function retrieves certificates from the LocalMachine\My store on a remote or local computer that will expire within a specified number of days.
+        This function retrieves the Subject Alternative Name (SAN) of a certificate based on its serial number.
 
-    .PARAMETER ExpirationDays
-        Specifies the number of days before a certificate expires.
+    .PARAMETER SerialNumber
+        Specifies the serial number of the certificate.
 
     .PARAMETER ComputerName
         Specifies the name of the remote computer to retrieve certificates from. Defaults to the local computer.
-
+    
     .PARAMETER Credential
         Specifies a user account with permissions to retrieve certificates from a remote computer.
 
     .EXAMPLE
-        PS C:\> Get-ExpiringCertificates -ExpirationDays 60 -ComputerName MyServer -Credential MyDomain\Administrator
-        Returns all certificates that will expire within the next 60 days on the MyServer computer using the MyDomain\Administrator account.
+        Get-CertificateSan -SerialNumber '1234567890' -ComputerName 'RemoteComputer' -Credential (Get-Credential)
+        Retrieves the Subject Alternative Name (SAN) of the certificate with serial number '1234567890'.
 
     .NOTES
         Author:     Daniel Schwitzgebel
@@ -27,13 +27,11 @@ function Get-ExpiringCertificates
         Version:    1.0
     #>
 
-    [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory)]
-        [ValidateRange(1, 365)]
-        [int]
-        $ExpirationDays,
+        [Parameter()]
+        [string]
+        $SerialNumber,
 
         [Parameter()]
         [string]
@@ -44,7 +42,7 @@ function Get-ExpiringCertificates
         [System.Management.Automation.Credential()]
         $Credential = [System.Management.Automation.PSCredential]::Empty
     )
-	
+
     $newPSSessionParam = @{
         ComputerName = $ComputerName
         ErrorAction  = 'Stop'
@@ -53,7 +51,7 @@ function Get-ExpiringCertificates
     if ($Credential -ne [System.Management.Automation.PSCredential]::Empty)
     {
         $newPSSessionParam['Credential'] = $Credential
-    }		
+    }
 
     try
     {
@@ -65,26 +63,19 @@ function Get-ExpiringCertificates
     }
     
     $scriptBlock = {
-        param($ExpirationDays)
+        param($SerialNumber)
         $certStore = New-Object System.Security.Cryptography.X509Certificates.X509Store('My', [System.Security.Cryptography.X509Certificates.StoreLocation]::LocalMachine)
         $certStore.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadOnly)
-        $certificates = $certStore.Certificates  | Where-Object { $_.NotAfter -lt (Get-Date).AddDays($ExpirationDays) }
-        $certificates | ForEach-Object {
-            [PSCustomObject]@{
-                Subject      = $_.Subject
-                Issuer       = $_.Issuer
-                Thumbprint   = $_.Thumbprint
-                SerialNumber = $_.SerialNumber
-                NotAfter     = $_.NotAfter
-            }
-        }
+        $cert = $certStore.Certificates | Where-Object { $_.SerialNumber -eq $SerialNumber }
+        $extension = $cert.Extensions | Where-Object { $_.Oid.FriendlyName -eq 'Subject Alternative Name' }
+        $extension.Format($false)
         $certStore.Close()
     }
 
     $invokeCommandParam = @{
         Session      = $session
         ScriptBlock  = $scriptBlock
-        ArgumentList = $ExpirationDays
+        ArgumentList = $SerialNumber
     }
 
     Invoke-Command @invokeCommandParam
